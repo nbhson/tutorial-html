@@ -1,5 +1,7 @@
 # SEMANTIC HTML LÀ GÌ? 
 
+> ⚠️ **Tài liệu cũ (legacy):** bài này thuộc thư mục `2_html-tutorial` đã ngừng bảo trì. Nội dung cập nhật, đầy đủ hơn về Semantic HTML nằm ở [`5_semantic`](../../5_semantic/README.md).
+
 ## TẠI SAO NÓ LẠI QUAN TRỌNG VỚI CẤU TRÚC WEBSITE?
 
 Ngoài Semantic keywords thì Semantic HTML cũng là một trong những yếu tố onpage giúp cho thuật toán của search engine hiểu các thành phần nào là quan trọng trong một trang web. 
