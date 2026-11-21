@@ -1,0 +1,14 @@
+<head>
+    <!-- CSS chặn render — giảm thiểu bằng: -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Inline CSS "above the fold" -->
+    <style>
+      /* CSS cho phần nhìn thấy đầu tiên */
+      .hero { min-height: 60vh; }
+    </style>
+
+    <!-- CSS không quan trọng: tải không chặn -->
+    <link rel="stylesheet" href="/css/print.css" media="print">
+    <link rel="stylesheet" href="/css/print-other.css" media="print" onload="this.media='all'">
+</head>

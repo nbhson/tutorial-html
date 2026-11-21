@@ -1,0 +1,14 @@
+/* Trạng thái mở */
+#menu:popover-open {
+    display: block;
+}
+
+/* Chuyển động với @starting-style (Chrome 117+, Safari 17.5+, Firefox 129+) */
+#menu {
+    opacity: 0;
+    transition: opacity 0.2s, display 0.2s allow-discrete;
+}
+#menu:popover-open {
+    opacity: 1;
+    @starting-style { opacity: 0; }
+}

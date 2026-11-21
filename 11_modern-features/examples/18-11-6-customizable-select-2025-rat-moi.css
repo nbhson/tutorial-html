@@ -1,0 +1,9 @@
+/* Bật chế độ customizable */
+select,
+select::picker(select) {
+    appearance: base-select;
+}
+
+/* Style từng phần */
+select::picker-icon { color: crimson; }        /* mũi tên */
+option:checked::checkmark { color: green; }     /* dấu check */

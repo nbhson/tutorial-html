@@ -2,9 +2,11 @@
 
 ## TẠI SAO NÓ LẠI QUAN TRỌNG VỚI CẤU TRÚC WEBSITE?
 
-Ngoài Semantic keywords thì Semantic HTML cũng là một trong những yếu tố onpage giúp cho thuật toán của search engine hiểu các thành phần nào là quan trọng trong một trang web.
+Mục mở đầu trả lời câu hỏi "vì sao phải semantic" trước khi vào tên thẻ cụ thể — đọc nó để hiểu tinh thần của cả phần này.
 
-Semantic HTML là cách viết HTML mà sử dụng các thẻ HTML ứng với nội dung được chứa trong nó chứ không phải sử dụng các thẻ theo cách mà chúng ta muốn nội dung trong đó được hiển thị. Nếu bạn là một Front-end web developer thì nên quan tâm đến Semantic HTML.
+Ngoài Semantic keywords thì Semantic HTML cũng là một trong những yếu tố onpage giúp cho thuật toán của search engine hiểu các thành phần nào là quan trọng trong một trang web. 
+
+Semantic HTML là cách viết HTML mà sử dụng các thẻ HTML ứng với nội dung được chứa trong nó chứ không phải sử dụng các thẻ theo cách mà chúng ta muốn nội dung trong đó được hiển thị. Ví von cho dễ hình dung: dán nhãn đúng lên từng hộp trong kho — hộp nào ghi "áo" thì đựng áo — thay vì dán nhãn tùy ý chỉ vì muốn nhìn nó gọn. Nếu bạn là một Front-end web developer thì nên quan tâm đến Semantic HTML.
 
 Semantic HTML rất quan trọng vì các công cụ tìm kiếm sử dụng thuật toán để xếp hạng các trang và Semantic HTML giúp đảm bảo rằng các tín hiệu được gửi đến công cụ tìm kiếm là chính xác và hữu ích nhất có thể.
 
@@ -18,6 +20,8 @@ Việc sử dụng các thẻ HTML đảm bảo rằng nội dung được cấu
 
 Bằng cách sử dụng các thẻ HTML đúng cách, bạn có thể đảm bảo rằng nội dung trang web của bạn được cấu trúc tốt và được hiểu bởi các thuật toán của công cụ tìm kiếm.
 
+> **Tóm gọn 1 câu:** Semantic HTML là "dán nhãn đúng hộp" — máy đọc là hiểu, người dùng tìm là thấy, Google xếp hạng là chuẩn hơn.
+
 ---
 
 *(Phần dưới đây được bổ sung theo chuẩn HTML Living Standard 2025–2026.)*
@@ -25,6 +29,8 @@ Bằng cách sử dụng các thẻ HTML đúng cách, bạn có thể đảm b�
 ---
 
 ## 5.1. Danh sách các thẻ Semantic chính
+
+Mục này là "danh bạ" các thẻ semantic: mỗi thẻ một vai — đọc để biết khi cần "món đồ" nào thì lấy thẻ nào.
 
 HTML5 giới thiệu bộ thẻ ngữ nghĩa để mô tả cấu trúc trang:
 
@@ -41,66 +47,21 @@ HTML5 giới thiệu bộ thẻ ngữ nghĩa để mô tả cấu trúc trang:
 | `<time>` | Thời gian máy có thể đọc được |
 | `<address>` | Thông tin liên hệ của tác giả/organizational |
 
+> **Cách đọc bảng này:** mỗi dòng là một "căn phòng" của ngôi nhà web — cột Vai trò nói phòng đó để làm gì; đọc dọc cột Thẻ để chấm điểm trang mình đang thiếu phòng nào.
+
 ---
 
 ## 5.2. Cấu trúc trang chuẩn Semantic
 
-```html
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chuẩn Semantic HTML</title>
-</head>
-<body>
-    <header>
-        <h1>Logo &amp; Tên website</h1>
-        <nav aria-label="Điều hướng chính">
-            <ul>
-                <li><a href="/">Trang chủ</a></li>
-                <li><a href="/bai-viet">Bài viết</a></li>
-                <li><a href="/lien-he">Liên hệ</a></li>
-            </ul>
-        </nav>
-    </header>
+Mục này ghép các "căn phòng" ở mục trên thành một ngôi nhà hoàn chỉnh — xem cấu trúc chuẩn để đối chiếu trang của mình.
 
-    <main>
-        <article>
-            <header>
-                <h2>Tiêu đề bài viết</h2>
-                <p>Đăng ngày <time datetime="2026-10-20">20 tháng 10, 2026</time></p>
-            </article>
-
-            <section>
-                <h3>Phần mở đầu</h3>
-                <p>Nội dung...</p>
-            </section>
-
-            <figure>
-                <img src="hinh.jpg" alt="Minh họa" loading="lazy">
-                <figcaption>Hình 1: Minh họa cấu trúc</figcaption>
-            </figure>
-
-            <aside>
-                <h4>Bài liên quan</h4>
-                <ul>
-                    <li><a href="/bai-2">Bài liên quan 1</a></li>
-                </ul>
-            </aside>
-        </article>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Website. Mọi quyền được bảo lưu.</p>
-    </footer>
-</body>
-</html>
-```
+> 📄 **Code ví dụ:** [`examples/01-5-2-cau-truc-trang-chuan-semantic.html`](examples/01-5-2-cau-truc-trang-chuan-semantic.html)
 
 ---
 
 ## 5.3. Quy tắc sử dụng từng thẻ
+
+Mục này là "sổ nội quy từng căn phòng": thẻ nào được đặt ở đâu, bao nhiêu lần, và tránh lầm chỗ nào.
 
 ### `<header>`
 - Có thể dùng nhiều lần: mỗi `<article>`, `<section>`, hoặc `<body>` đều có thể có `<header>` riêng
@@ -111,16 +72,7 @@ HTML5 giới thiệu bộ thẻ ngữ nghĩa để mô tả cấu trúc trang:
 - Không bọc mọi cụm liên kết trong `<nav>`
 - Trang có thể có nhiều `<nav>`, dùng `aria-label` để phân biệt:
 
-```html
-<nav aria-label="Menu chính">...</nav>
-<nav aria-label="Breadcrumb">
-    <ol>
-        <li><a href="/">Trang chủ</a></li>
-        <li><a href="/html">HTML</a></li>
-        <li aria-current="page">Semantic</li>
-    </ul>
-</nav>
-```
+> 📄 **Code ví dụ:** [`examples/02-nav.html`](examples/02-nav.html)
 
 ### `<main>`
 - **Chỉ một `<main>` hiển thị** cho mỗi trang
@@ -129,21 +81,12 @@ HTML5 giới thiệu bộ thẻ ngữ nghĩa để mô tả cấu trúc trang:
 
 ### `<article>` vs `<section>`
 
-- `<article>`: nội dung **độc lập, tự hoàn chỉnh** — đưa sang trang khác vẫn hiểu được (bài viết, sản phẩm, bình luận, card tin tức)
-- `<section>`: nhóm nội dung theo **chủ đề trong trang**, gần như luôn cần tiêu đề `<h1>`–`<h6>`
+- `<article>`: nội dung **độc lập, tự hoàn chỉnh** — đưa sang trang khác vẫn hiểu được (bài viết, sản phẩm, bình luận, card tin tức). Ví von: bài báo in trên tờ báo khác vẫn là bài báo trọn vẹn
+- `<section>`: nhóm nội dung theo **chủ đề trong trang**, gần như luôn cần tiêu đề `<h1>`–`<h6>` — như một "chương" trong sách, tách khỏi sách thì mất ngữ cảnh
 
-```html
-<article>
-    <h2>Bài viết chính</h2>
-    <p>...</p>
-    <section>
-        <h3>Phần 1: Giới thiệu</h3>
-    </section>
-    <section>
-        <h3>Phần 2: Nội dung</h3>
-    </section>
-</article>
-```
+> 📄 **Code ví dụ:** [`examples/03-article-vs-section.html`](examples/03-article-vs-section.html)
+
+> **Tóm gọn 1 câu:** Đặt câu hỏi "đưa sang trang khác còn hiểu không?" — có là `<article>`, không là `<section>`.
 
 ### `<aside>`
 Nội dung **liên quan gián tiếp** đến nội dung xung quanh: sidebar, box "Bài liên quan", chú thích kéo dài, quảng cáo.
@@ -155,22 +98,26 @@ Thông tin kết thúc: tác giả, bản quyền, liên kết điều hướng 
 
 ## 5.4. Outline Algorithm và Heading
 
+Mục này nói về một "trường hợp đã khép lại": thuật toán outline tự động từng được kỳ vọng, nhưng nay không còn — và điều đó thay đổi cách bạn đặt heading.
+
 Cấu trúc heading (`h1`–`h6`) nên phản ánh đúng cấu trúc nội dung. Từ HTML Living Standard, thuật toán "document outline" tự động (dựa trên `<section>`/`<article>`) **không còn được các trình duyệt/assistive tech hỗ trợ** — vì vậy:
 
 > **Quy tắc thực tế 2026:** Đừng dựa vào sectioning để "reset" cấp heading. Luôn dùng `h1` → `h2` → `h3` theo thứ tự logic rõ ràng, bất kể phần tử bọc bên ngoài là gì.
 
+> **Tóm gọn 1 câu:** Đừng trông chờ "ma thuật outline" — heading đúng thứ tự do chính tay bạn xếp, không có máy nào làm thay.
+
 ---
 
 ## 5.5. Semantic HTML và SEO
+
+Mục này nối semantic với SEO: các thẻ đúng vai giúp Google "đọc đồ" trang của bạn chính xác hơn.
 
 - Search engine dùng các landmark (`<nav>`, `<main>`, `<header>`, `<footer>`) để hiểu vùng nội dung
 - `<article>` giúp Google hiểu khối nội dung chính của trang
 - `<time datetime="...">` cung cấp dữ liệu ngày tháng máy đọc được
 - Kết hợp với dữ liệu có cấu trúc (xem [Phần 9: SEO](../9_seo/README.md)) cho hiệu quả tốt nhất
 
-```html
-<time datetime="2026-10-20T09:30+07:00">20/10/2026, 9:30 sáng</time>
-```
+> 📄 **Code ví dụ:** [`examples/04-5-5-semantic-html-va-seo.html`](examples/04-5-5-semantic-html-va-seo.html)
 
 ---
 
@@ -187,11 +134,17 @@ Trình đọc màn hình (NVDA, VoiceOver, JAWS) nhận diện các landmark:
 | `<footer>` (con trực tiếp của body) | `contentinfo` |
 | `<form aria-label="...">` | `form` / `search` |
 
+> **Cách đọc bảng này:** mỗi dòng là một thẻ và "chức danh" (landmark role) mà screen reader tự nhận diện — người dùng màn hình nhảy giữa các chức danh này như nhảy mục lục; thẻ nào thiếu là chức danh đó vắng mặt.
+
 Người dùng screen reader có thể nhảy nhanh giữa các landmark — đây là lý do lớn nhất để dùng Semantic HTML thay vì `<div>`.
+
+> **Tóm gọn 1 câu:** Landmark là "biển chỉ đường cho screen reader" — semantic HTML đi kèm landmark miễn phí, còn `<div>` thì để trống biển hiệu.
 
 ---
 
 ## 5.7. Kiểm tra: trang của bạn đã semantic chưa?
+
+Mục này là "phiếu kiểm tra xe trước khi đổ đường": đánh dấu từng mục để biết trang của mình đạt chuẩn semantic chưa.
 
 Danh sách kiểm tra nhanh:
 
@@ -220,6 +173,8 @@ Danh sách kiểm tra nhanh:
 - ✅ Một `<main>` duy nhất mỗi trang
 - ✅ Giúp SEO hiểu nội dung + screen reader điều hướng nhanh
 - ✅ Đặt tiêu đề `<h1>`–`<h6>` rõ ràng, không phụ thuộc outline tự động
+
+> **Tóm gọn 1 câu:** Semantic HTML là xây nhà có phòng chức năng rõ ràng — máy hiểu, người dùng điều hướng nhanh, SEO hưởng lợi hết.
 
 ---
 

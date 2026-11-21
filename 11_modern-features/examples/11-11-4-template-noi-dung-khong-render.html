@@ -1,0 +1,23 @@
+<template id="card-template">
+    <article class="card">
+        <h3 class="card-title"></h3>
+        <p class="card-desc"></p>
+    </article>
+</template>
+
+<div id="list"></div>
+
+<script>
+  const tpl = document.querySelector('#card-template');
+  const data = [
+    { title: 'Bài viết 1', desc: 'Nội dung 1' },
+    { title: 'Bài viết 2', desc: 'Nội dung 2' },
+  ];
+
+  for (const item of data) {
+    const node = tpl.content.cloneNode(true);   // nhân bản khuôn mẫu
+    node.querySelector('.card-title').textContent = item.title;
+    node.querySelector('.card-desc').textContent = item.desc;
+    document.querySelector('#list').append(node);
+  }
+</script>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 1. Kết nối sớm -->
+    <link rel="preconnect" href="https://cdn.example.com" crossorigin>
+    <link rel="dns-prefetch" href="https://api.example.com">
+
+    <!-- 2. Preload LCP -->
+    <link rel="preload" as="image" href="/hero.avif" fetchpriority="high">
+
+    <!-- 3. CSS + Font -->
+    <link rel="stylesheet" href="/css/critical.css">
+    <link rel="preload" as="font" href="/fonts/main.woff2" type="font/woff2" crossorigin>
+
+    <!-- 4. JS không chặn -->
+    <script src="/js/app.js" type="module"></script>
+    <script src="/js/analytics.js" defer></script>
+</head>
+<body>
+    <!-- LCP element: KHÔNG lazy -->
+    <img src="/hero.avif" alt="Hero" width="1200" height="630" fetchpriority="high">
+
+    <!-- Ảnh dưới màn hình: lazy -->
+    <img src="/item.jpg" alt="Sản phẩm" width="400" height="300" loading="lazy">
+</body>
+</html>

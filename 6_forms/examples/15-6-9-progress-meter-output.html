@@ -1,0 +1,14 @@
+<!-- Progress: tiến trình công việc -->
+<label for="tai">Đang tải:</label>
+<progress id="tai" value="70" max="100">70%</progress>
+
+<!-- Meter: mức đo trong phạm vi đã biết -->
+<label for="dia">Dung lượng ổ đĩa:</label>
+<meter id="dia" value="0.6" min="0" max="1" low="0.3" high="0.8" optimum="0.2">60%</meter>
+
+<!-- Output: kết quả tính toán -->
+<form oninput="kq.value = Number(a.value) + Number(b.value)">
+    <input type="number" id="a" value="5"> +
+    <input type="number" id="b" value="3"> =
+    <output name="kq" for="a b">8</output>
+</form>

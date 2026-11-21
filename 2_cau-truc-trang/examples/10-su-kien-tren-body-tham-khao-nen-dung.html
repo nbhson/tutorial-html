@@ -1,0 +1,8 @@
+<!-- Cách cũ — KHÔNG khuyến khích -->
+<body onload="init()" onresize="onResize()">
+
+<!-- ✅ Cách hiện đại: dùng JavaScript bên ngoài -->
+<script>
+  window.addEventListener('load', init);
+  window.addEventListener('resize', onResize, { passive: true });
+</script>

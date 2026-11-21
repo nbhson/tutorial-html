@@ -2,11 +2,11 @@
 
 > **Thư mục này là tài liệu nền tảng cũ của kho học liệu, KHÔNG còn được bảo trì.**
 >
-> Nội dung bên trong là file `.docx` (bài giảng dưới dạng Word) được viết trước khi repo chuyển sang định dạng Markdown. Vui lòng **không đọc theo các file này** để học HTML — nội dung đã lỗi thời và không còn được cập nhật.
+> Nội dung bên trong là file `.docx` (bài giảng dưới dạng Word) được viết trước khi repo chuyển sang định dạng Markdown. Vui lòng **không đọc theo các file này** để học HTML — nội dung đã lỗi thời và không còn được cập nhật. Hãy hình dung đây là "căn kho chứa đồ cũ": giữ để tra cứu lịch sử, nhưng sinh hoạt hằng ngày thì ở nhà mới.
 
 ## Hãy học theo giáo trình mới
 
-Giáo trình chính thức của repo nằm ở các thư mục đánh số:
+Mục này chỉ bạn lối đến đúng nơi cần học — giáo trình chính thức nằm ở các thư mục đánh số:
 
 - [`1_tong-quan-html`](../1_tong-quan-html/README.md) — HTML là gì, DOCTYPE, cấu trúc tài liệu (thay cho các bài "what is domain", "client-server model" cũ)
 - [`2_cau-truc-trang`](../2_cau-truc-trang/README.md) — `<head>`, `<body>`, thẻ meta (thay cho "technologies used on a website")
@@ -23,3 +23,5 @@ Giáo trình chính thức của repo nằm ở các thư mục đánh số:
 | `5_qualities-of-it/` | Những tố chất cần có của một IT |
 
 Các file `.docx` này được **giữ lại làm tài liệu lịch sử**, không được cập nhật và không được tham chiếu trong giáo trình mới.
+
+> **Tóm gọn 1 câu:** Thư mục này là "kho lưu trữ" chứ không phải "lớp học" — mọi nội dung học HTML đều nằm ở các thư mục đánh số.

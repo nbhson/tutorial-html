@@ -1,0 +1,17 @@
+<!-- 1. CSS: đặt trong head (chuẩn) -->
+<link rel="stylesheet" href="style.css">
+
+<!-- 2. CSS inlining cho phần trên màn hình đầu (Above the fold) -->
+<style> /* CSS quan trọng */ </style>
+
+<!-- 3. JS blocking (tránh!) — chặn parse HTML -->
+<script src="app.js"></script>
+
+<!-- 4. JS async — tải song song, chạy ngay khi xong (không đảm bảo thứ tự) -->
+<script src="analytics.js" async></script>
+
+<!-- 5. JS defer — tải song song, chạy sau khi parse xong, đúng thứ tự (khuyến khích) -->
+<script src="app.js" defer></script>
+
+<!-- 6. JS module — mặc định giống defer -->
+<script type="module" src="app.js"></script>

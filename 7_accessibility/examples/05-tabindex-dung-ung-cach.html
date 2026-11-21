@@ -1,0 +1,8 @@
+<!-- ✅ tabindex="0": đưa phần tử vào thứ tự tab tự nhiên -->
+<div tabindex="0" role="slider" aria-valuenow="5">...</div>
+
+<!-- ✅ tabindex="-1": chỉ focus được bằng JS (focus management) -->
+<h1 tabindex="-1">Tiêu đề được focus khi SPA đổi trang</h1>
+
+<!-- ❌ tabindex="1"+: phá vỡ thứ tự tab tự nhiên — KHÔNG dùng -->
+<button tabindex="2">Tránh!</button>

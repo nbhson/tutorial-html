@@ -1,0 +1,19 @@
+<!-- Mở/đóng dialog không cần JavaScript! -->
+<button commandfor="dlg" command="show-modal">Mở</button>
+<button commandfor="dlg" command="close">Đóng</button>
+
+<dialog id="dlg">Nội dung</dialog>
+
+<!-- Điều khiển popover -->
+<button commandfor="pop" command="show-popover">Hiện</button>
+<button commandfor="pop" command="hide-popover">Ẩn</button>
+<button commandfor="pop" command="toggle-popover">Bật/tắt</button>
+<div id="pop" popover>Nội dung popover</div>
+
+<!-- Custom command -->
+<button commandfor="app" command="--show-confetti">🎉</button>
+<script>
+  document.querySelector('#app').addEventListener('command', (e) => {
+    if (e.command === '--show-confetti') fireConfetti();
+  });
+</script>

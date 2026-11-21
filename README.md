@@ -6,7 +6,9 @@
 
 ## Thứ tự đọc khuyến nghị
 
-Học tuần tự từ 1 → 12:
+Mục này là "bản đồ" của cả khoá học — đọc nó để biết đi từ đâu, theo lối nào, và mình thuộc nhóm người học nào.
+
+Học tuần tự từ 1 → 12, giống như leo cầu thang từng bậc — bỏ bậc nào là mất thăng bằng ở bậc sau:
 
 ```
 1_tong-quan-html → 2_cau-truc-trang → 3_the-co-ban → 4_thuoc-tinh → 5_semantic
@@ -40,16 +42,20 @@ Học tuần tự từ 1 → 12:
 
 ## Tổng quan
 
-**HTML (HyperText Markup Language)** là ngôn ngữ đánh dấu tiêu chuẩn để tạo nội dung trên web. HTML mô tả **cấu trúc** của một trang web bằng cách sử dụng một hệ thống các phần tử (elements). Các phần tử này cho trình duyệt biết cách hiển thị nội dung.
+Mục này trả lời câu hỏi đầu tiên và quan trọng nhất: HTML thực chất là gì, học nó để làm gì, và bạn cần chuẩn bị những gì trước khi bắt tay vào code.
+
+**HTML (HyperText Markup Language)** là ngôn ngữ đánh dấu tiêu chuẩn để tạo nội dung trên web. Hãy hình dung trang web như một ngôi nhà: HTML là **khung xương và các bức tường** (cấu trúc), CSS là lớp sơn và nội thất (diện mạo), còn JavaScript là điện nước (hành vi). HTML mô tả **cấu trúc** của một trang web bằng cách sử dụng một hệ thống các phần tử (elements). Các phần tử này cho trình duyệt biết cách hiển thị nội dung.
 
 ### Tại sao học HTML?
 
-- **Nền tảng của mọi trang web** — Mọi trang web đều được xây dựng trên HTML
-- **Dễ học** — Cú pháp đơn giản, trực quan
-- **Không phụ thuộc ngôn ngữ lập trình** — HTML hoạt động với mọi backend
+- **Nền tảng của mọi trang web** — Dù bạn làm backend, frontend hay data, sớm muộn cũng phải chạm vào HTML — giống như mọi nhà đều cần móng
+- **Dễ học** — Cú pháp đơn giản, trực quan; chỉ cần gõ thẻ là thấy kết quả ngay
+- **Không phụ thuộc ngôn ngữ lập trình** — HTML hoạt động với mọi backend: Node.js, PHP, Python, Java...
 - **Tiêu chuẩn web** — Được duy trì bởi WHATWG (HTML Living Standard)
 
 ### Yêu cầu tiên quyết
+
+Đừng lo nếu bạn chưa từng viết code — bài học này bắt đầu từ con số 0:
 
 - Máy tính có trình duyệt web (Chrome, Firefox, Safari, Edge)
 - Trình soạn thảo mã (VS Code, Sublime Text, hoặc bất kỳ editor nào)
@@ -57,14 +63,9 @@ Học tuần tự từ 1 → 12:
 
 ### Chuẩn bị môi trường
 
-```bash
-# Tạo file HTML đầu tiên
-mkdir html-tutorial && cd html-tutorial
-touch index.html
+> 📄 **Code ví dụ:** [`examples/01-chuan-bi-moi-truong.sh`](examples/01-chuan-bi-moi-truong.sh)
 
-# Mở bằng VS Code
-code .
-```
+> **Tóm gọn 1 câu:** HTML là bộ khung xương của mọi trang web — không cần biết lập trình, bạn vẫn có thể bắt đầu đánh dấu nội dung ngay hôm nay.
 
 ---
 

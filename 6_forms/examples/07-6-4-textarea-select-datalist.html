@@ -1,0 +1,32 @@
+<!-- Textarea: văn bản nhiều dòng -->
+<label for="mo-ta">Mô tả</label>
+<textarea id="mo-ta" name="mo-ta" rows="5" cols="40" maxlength="500" placeholder="Nhập mô tả..."></textarea>
+
+<!-- Select: dropdown -->
+<label for="thanh-pho">Thành phố</label>
+<select id="thanh-pho" name="thanh-pho">
+    <option value="">-- Chọn --</option>
+    <optgroup label="Miền Bắc">
+        <option value="hanoi" selected>Hà Nội</option>
+        <option value="haiphong">Hải Phòng</option>
+    </optgroup>
+    <optgroup label="Miền Nam">
+        <option value="hcm">TP. Hồ Chí Minh</option>
+    </optgroup>
+</select>
+
+<!-- Select multiple -->
+<select name="ngon-ngu" multiple size="3">
+    <option value="vi">Tiếng Việt</option>
+    <option value="en">Tiếng Anh</option>
+    <option value="ja">Tiếng Nhật</option>
+</select>
+
+<!-- Datalist: input kết hợp gợi ý -->
+<label for="trinh-duyet">Trình duyệt</label>
+<input list="ds-trinh-duyet" id="trinh-duyet" name="trinh-duyet">
+<datalist id="ds-trinh-duyet">
+    <option value="Chrome">
+    <option value="Firefox">
+    <option value="Safari">
+</datalist>

@@ -1,0 +1,17 @@
+<!-- 1. preconnect tới font CDN -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- 2. Font display: swap -->
+<style>
+  @font-face {
+    font-family: 'Be Vietnam Pro';
+    src: url('/fonts/be-vietnam-pro.woff2') format('woff2');
+    font-display: swap;        /* hiển thị fallback ngay, đổi font khi tải xong */
+    font-weight: 400 700;      /* variable font */
+    font-style: normal;
+  }
+</style>
+
+<!-- 3. Preload font quan trọng -->
+<link rel="preload" href="/fonts/be-vietnam-pro.woff2" as="font" type="font/woff2" crossorigin>

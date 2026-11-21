@@ -1,0 +1,3 @@
+# GitHub Actions
+- name: HTML validation
+  run: npx html-validate "dist/**/*.html"

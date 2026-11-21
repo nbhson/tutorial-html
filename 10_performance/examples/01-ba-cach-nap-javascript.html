@@ -1,0 +1,11 @@
+<!-- 1. Blocking (mặc định) — CHẶN parser, chậm nhất -->
+<script src="app.js"></script>
+
+<!-- 2. async — tải song song, chạy ngay khi tải xong (thứ tự không đảm bảo) -->
+<script src="analytics.js" async></script>
+
+<!-- 3. defer — tải song song, chạy sau khi DOM parse xong, đúng thứ tự -->
+<script src="app.js" defer></script>
+
+<!-- 4. type="module" — mặc định như defer -->
+<script type="module" src="app.js"></script>

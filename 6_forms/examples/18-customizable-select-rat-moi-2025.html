@@ -1,0 +1,11 @@
+<!-- Chrome 135+, Safari 27+; chưa có Firefox — cần feature-detect -->
+<select>
+    <button>
+        <selectedcontent></selectedcontent>  <!-- phản chiếu option đang chọn -->
+    </button>
+    <option value="hn">🇻🇳 Hà Nội</option>
+    <option value="sg">🇻🇳 Sài Gòn</option>
+</select>
+<style>
+  select, ::picker(select) { appearance: base-select; }
+</style>

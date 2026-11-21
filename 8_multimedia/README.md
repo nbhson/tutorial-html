@@ -2,13 +2,9 @@
 
 ## 8.1. Video — `<video>`
 
-```html
-<video controls width="640" height="360" poster="anh-bia.jpg">
-    <source src="video.mp4" type="video/mp4">
-    <source src="video.webm" type="video/webm">
-    Trình duyệt của bạn không hỗ trợ video HTML5.
-</video>
-```
+Mục này mở đầu phần media bằng thẻ `<video>`: chèn video vào trang thuần HTML, cùng bộ thuộc tính điều khiển phát, poster và autoplay.
+
+> 📄 **Code ví dụ:** [`examples/01-8-1-video-video.html`](examples/01-8-1-video-video.html)
 
 ### Thuộc tính quan trọng
 
@@ -23,36 +19,23 @@
 | `playsinline` | Phát inline trên iOS (không fullscreen tự động) |
 | `width`, `height` | Đặt kích thước → tránh layout shift |
 
+> **Cách đọc bảng này:** cột "Thuộc tính" là nút bấm trong thẻ `<video>`, cột "Ý nghĩa" là tác dụng — hai dòng đáng nhớ nhất là `preload` (chọn `metadata` cho nhẹ) và `playsinline` (bắt buộc nếu muốn video chạy gọn trên iPhone).
+
 ### Ví dụ video hoàn chỉnh chuẩn 2026
 
-```html
-<video controls
-       width="1280" height="720"
-       poster="poster.webp"
-       preload="metadata"
-       playsinline
-       crossorigin="anonymous">
-    <source src="video-1080p.webm" type="video/webm">
-    <source src="video-1080p.mp4" type="video/mp4">
-    <track kind="captions" src="phu-de-vi.vtt" srclang="vi" label="Tiếng Việt" default>
-    <track kind="subtitles" src="phu-de-en.vtt" srclang="en" label="English">
-    <p>Trình duyệt không hỗ trợ. <a href="video.mp4">Tải video</a>.</p>
-</video>
-```
+> 📄 **Code ví dụ:** [`examples/02-vi-du-video-hoan-chinh-chuan-2026.html`](examples/02-vi-du-video-hoan-chinh-chuan-2026.html)
 
 > **Chính sách autoplay:** Các trình duyệt hiện đại **chặn autoplay có tiếng**. Video autoplay phải `muted` hoặc người dùng đã tương tác với trang.
+
+> **Tóm gọn 1 câu:** Video tự phát phải "câm lặng" (`muted` + `playsinline`) — quy tắc bất thành văn của mọi trình duyệt hiện đại.
 
 ---
 
 ## 8.2. Audio — `<audio>`
 
-```html
-<audio controls preload="metadata">
-    <source src="bai-hat.opus" type="audio/ogg">
-    <source src="bai-hat.mp3" type="audio/mpeg">
-    Trình duyệt không hỗ trợ audio.
-</audio>
-```
+Mục này nói về thẻ `<audio>` và các định dạng âm thanh — chọn codec nào để mọi trình duyệt đều phát được.
+
+> 📄 **Code ví dụ:** [`examples/03-8-2-audio-audio.html`](examples/03-8-2-audio-audio.html)
 
 ### Định dạng audio phổ biến
 
@@ -63,20 +46,17 @@
 | Opus | Opus | Toàn bộ trình duyệt hiện đại, hiệu suất tốt |
 | WAV | PCM | Toàn bộ (file lớn) |
 
+> **Cách đọc bảng này:** cột "Định dạng" là loại file, cột "Hỗ trợ" cho biết bao nhiêu trình duyệt phát được — nếu phân vân, MP3/AAC là lựa chọn "an toàn tuyệt đối", Opus là lựa chọn "hiệu quả nhất".
+
 ---
 
 ## 8.3. `<track>` — Phụ đề và caption
 
+Mục này nói về "dòng chữ dưới màn hình": `<track>` — cách gắn phụ đề cho video/audio, vừa giúp người điếc vừa bắt buộc theo WCAG.
+
 `<track>` nằm trong `<video>`/`<audio>`, chứa text track định dạng **WebVTT** (.vtt):
 
-```html
-<video controls>
-    <source src="bai-giang.mp4" type="video/mp4">
-    <track kind="subtitles" src="phu-de-vi.vtt" srclang="vi" label="Tiếng Việt" default>
-    <track kind="captions"  src="caption-en.vtt" srclang="en" label="English">
-    <track kind="chapters"  src="chuong.vtt"      srclang="vi" label="Chương">
-</video>
-```
+> 📄 **Code ví dụ:** [`examples/04-8-3-track-phu-e-va-caption.html`](examples/04-8-3-track-phu-e-va-caption.html)
 
 ### Giá trị `kind`
 
@@ -86,6 +66,8 @@
 | `captions` | Phụ đề kèm âm thanh mô tả (cho người điếc) |
 | `descriptions` | Mô tả âm thanh cho người khiếm thị |
 | `chapters` | Đánh dấu chương |
+
+> **Cách đọc bảng này:** cột `kind` là "loại dòng chữ" gắn kèm video — phân biệt phụ đề dịch thuật (`subtitles`), phụ đề cho người điếc (`captions`) và mô tả cho người khiếm thị (`descriptions`); chọn sai kind là trình duyệt hiểu sai mục đích.
 
 ### File WebVTT mẫu
 
@@ -101,21 +83,15 @@ Hôm nay chúng ta tìm hiểu về multimedia.
 
 > **WCAG 1.2.2 (Level A):** Video có âm thoại phải có captions. Đây là yêu cầu bắt buộc.
 
+> **Tóm gọn 1 câu:** `<track kind="captions">` không phải "món trang trí" — với video có thoại, nó là giấy phép bắt buộc theo WCAG.
+
 ---
 
 ## 8.4. `iframe` — Nhúng nội dung khác
 
-```html
-<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        width="560" height="315"
-        title="Video hướng dẫn HTML"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
-        allowfullscreen
-        referrerpolicy="strict-origin-when-cross-origin"
-        sandbox="allow-scripts allow-same-origin allow-presentation">
-</iframe>
-```
+Mục này nói về "cửa sổ sang nhà hàng xóm": iframe — nhúng trang khác vào trang của bạn, và những rào chắn bảo mật cần dựng kèm.
+
+> 📄 **Code ví dụ:** [`examples/05-8-4-iframe-nhung-noi-dung-khac.html`](examples/05-8-4-iframe-nhung-noi-dung-khac.html)
 
 ### Thuộc tính bảo mật của iframe
 
@@ -127,57 +103,35 @@ Hôm nay chúng ta tìm hiểu về multimedia.
 | `allow` | Permissions Policy: camera, microphone, fullscreen... |
 | `referrerpolicy` | Kiểm soát referrer |
 
+> **Cách đọc bảng này:** dòng đầu (`title`) là nghĩa vụ a11y, dòng `sandbox` và `allow` là "hộ chiếu và visa" cho nội dung nhúng — nội dung càng ít tin cậy thì visa càng cắt gọn.
+
 ### `sandbox` — isolating nội dung không tin cậy
 
-```html
-<!-- Chặn script, chặn form, chặn popup -->
-<iframe src="dung-thu.html" sandbox></iframe>
-
-<!-- Cho phép script nhưng không cùng origin -->
-<iframe src="widget.html" sandbox="allow-scripts"></iframe>
-```
+> 📄 **Code ví dụ:** [`examples/06-sandbox-isolating-noi-dung-khong-tin-cay.html`](examples/06-sandbox-isolating-noi-dung-khong-tin-cay.html)
 
 > **Lưu ý:** Nếu `src` trỏ đến origin khác, luôn cân nhắc `sandbox`. Tránh dùng `allow-scripts allow-same-origin` cùng lúc với nội dung không tin cậy (nó cho phép phá bỏ sandbox).
 
 ### iframes hiện đại: `credentialless` / `csp`
 
-```html
-<!-- Chrome 110+: iframe không chia sẻ credential, giảm rủi ro XS-Leaks -->
-<iframe src="https://untrusted.example/embed" credentialless></iframe>
-```
+> 📄 **Code ví dụ:** [`examples/07-iframes-hien-ai-credentialless-csp.html`](examples/07-iframes-hien-ai-credentialless-csp.html)
 
 ---
 
 ## 8.5. Hình ảnh responsive — `<picture>` và `srcset`
 
+Mục này giải quyết bài toán "một ảnh, nhiều màn hình": dùng `srcset`/`sizes` và `<picture>` để mỗi thiết bị nhận đúng tấm ảnh vừa khít.
+
 ### 8.4.1. `srcset` + `sizes` — chọn độ phân giải
 
-```html
-<img src="anh-800.jpg"
-     srcset="anh-400.jpg 400w,
-             anh-800.jpg 800w,
-             anh-1600.jpg 1600w"
-     sizes="(max-width: 600px) 100vw, 50vw"
-     alt="Biểu đồ tăng trưởng" width="800" height="450" loading="lazy">
-```
+> 📄 **Code ví dụ:** [`examples/08-8-4-1-srcset-sizes-chon-o-phan.html`](examples/08-8-4-1-srcset-sizes-chon-o-phan.html)
 
-- `srcset`: danh sách ảnh với độ rộng thực (pixel)
+- `srcset`: danh sách ảnh với độ rộng thực (pixel) — như chuẩn bị nhiều size đồng phục để khách tự chọn vừa
 - `sizes`: gợi ý chiều rộng hiển thị theo điều kiện
 - Trình duyệt tự chọn ảnh phù hợp với màn hình (DPR, kích thước)
 
 ### 8.4.2. `<picture>` — Art direction / đổi định dạng
 
-```html
-<picture>
-    <!-- Ảnh hiện đại nhẹ hơn -->
-    <source type="image/avif" srcset="anh.avif">
-    <source type="image/webp" srcset="anh.webp">
-    <!-- Ảnh crop khác nhau theo màn hình -->
-    <source media="(max-width: 600px)" srcset="anh-mobile.jpg">
-    <!-- Fallback bắt buộc -->
-    <img src="anh.jpg" alt="Mô tả ảnh" width="800" height="450">
-</picture>
-```
+> 📄 **Code ví dụ:** [`examples/09-8-4-2-picture-art-direction-oi-inh.html`](examples/09-8-4-2-picture-art-direction-oi-inh.html)
 
 | Định dạng | Hỗ trợ | Ghi chú |
 |-----------|--------|---------|
@@ -185,36 +139,23 @@ Hôm nay chúng ta tìm hiểu về multimedia.
 | WebP | Chrome 32+, Firefox 65+, Safari 14+ | Phổ biến, nén tốt |
 | JPEG/PNG | Toàn bộ | Fallback |
 
+> **Cách đọc bảng này:** đọc từ dưới lên để hiểu thứ tự ưu tiên — JPEG/PNG là "sàn nhà" ai cũng đứng được, WebP/AVIF là các "tầng ưu tiên" trình duyệt hiện đại sẽ lên trước nếu đi được.
+
 ---
 
 ## 8.6. `<figure>` và `<figcaption>`
 
-```html
-<figure>
-    <img src="bieu-do.png" alt="Doanh thu theo quý" width="600" height="400" loading="lazy">
-    <figcaption>Hình 2: Doanh thu theo quý năm 2025 (nghìn VND)</figcaption>
-</figure>
+Mục này nói về "bức tranh có nhãn": cặp thẻ bọc hình ảnh/minh họa kèm chú thích — máy hiểu đây là một khối media trọn vẹn.
 
-<!-- Áp dụng cho code, video, bảng -->
-<figure>
-    <video controls width="640"><source src="demo.mp4" type="video/mp4"></video>
-    <figcaption>Video 1: Demo tính năng kéo thả</figcaption>
-</figure>
-```
+> 📄 **Code ví dụ:** [`examples/10-8-6-figure-va-figcaption.html`](examples/10-8-6-figure-va-figcaption.html)
 
 ---
 
 ## 8.7. Embed nội dung khác: `<embed>`, `<object>`
 
-```html
-<!-- <embed>: nhúng plugin nội dung (PDF, SVG) -->
-<embed src="tai-lieu.pdf" type="application/pdf" width="600" height="400">
+Mục này giới thiệu hai thẻ nhúng "thế hệ trước" — biết đến để không dùng nhầm chỗ, không phải bỏ quên.
 
-<!-- <object>: nhúng kèm nội dung fallback -->
-<object data="tai-lieu.pdf" type="application/pdf" width="600" height="400">
-    <p>Trình duyệt không hiển thị được PDF. <a href="tai-lieu.pdf">Tải xuống</a>.</p>
-</object>
-```
+> 📄 **Code ví dụ:** [`examples/11-8-7-embed-noi-dung-khac-embed-object.html`](examples/11-8-7-embed-noi-dung-khac-embed-object.html)
 
 > **Khuyến nghị 2026:** Hạn chế `<embed>`/`<object>`; ưu tiên iframe cho trang web, `<video>`/`<audio>` cho media, và nhúng PDF bằng Google Docs viewer hoặc thư viện PDF.js.
 
@@ -222,29 +163,15 @@ Hôm nay chúng ta tìm hiểu về multimedia.
 
 ## 8.8. Sự kiện và điều khiển media bằng JS
 
-```javascript
-const video = document.querySelector('video');
+Mục này là "bảng điều khiển từ xa": các sự kiện media và cách điều khiển video/audio bằng JavaScript.
 
-// Điều khiển
-video.play();          // trả về Promise (bắt lỗi NotAllowedError nếu autoplay bị chặn)
-video.pause();
-video.currentTime = 30; // nhảy tới giây 30
-video.playbackRate = 1.5;
-video.volume = 0.5;
-
-// Sự kiện
-video.addEventListener('play', () => console.log('Đang phát'));
-video.addEventListener('ended', () => console.log('Kết thúc'));
-video.addEventListener('error', (e) => console.error('Lỗi tải video', e));
-
-// CanPlayType: kiểm tra hỗ trợ định dạng
-const canAv1 = video.canPlayType('video/mp4; codecs="av01.0.05M.08"');
-console.log(canAv1); // "probably" | "maybe" | ""
-```
+> 📄 **Code ví dụ:** [`examples/12-8-8-su-kien-va-ieu-khien-media.js`](examples/12-8-8-su-kien-va-ieu-khien-media.js)
 
 ---
 
 ## 8.9. Tối ưu media — checklist nhanh
+
+Mục này gom tất cả thành "danh sách dán cửa": điểm từng mục trước khi deploy để media không làm chậm trang.
 
 - [ ] Video dùng `preload="metadata"` hoặc `preload="none"` (không `auto`)
 - [ ] Poster image + `width`/`height` cho video → tránh layout shift
@@ -273,6 +200,8 @@ console.log(canAv1); // "probably" | "maybe" | ""
 - ✅ `<picture>` + `srcset`/`sizes` = responsive images chuẩn
 - ✅ `iframe` cần `title`, `loading="lazy"`, và `sandbox` cho nội dung ngoài
 - ✅ `figure` + `figcaption` bọc media có chú thích
+
+> **Tóm gọn 1 câu:** Media dùng đúng thẻ và đúng thuộc tính là được 3 thứ miễn phí: hiển thị mượt, tải nhanh, và ai cũng xem/nhận được nội dung.
 
 ---
 

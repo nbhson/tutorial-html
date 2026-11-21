@@ -1,0 +1,9 @@
+<picture>
+    <!-- Ảnh hiện đại nhẹ hơn -->
+    <source type="image/avif" srcset="anh.avif">
+    <source type="image/webp" srcset="anh.webp">
+    <!-- Ảnh crop khác nhau theo màn hình -->
+    <source media="(max-width: 600px)" srcset="anh-mobile.jpg">
+    <!-- Fallback bắt buộc -->
+    <img src="anh.jpg" alt="Mô tả ảnh" width="800" height="450">
+</picture>

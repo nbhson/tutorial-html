@@ -1,0 +1,28 @@
+<!-- preconnect: mở kết nối sớm (DNS + TCP + TLS) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- dns-prefetch: chỉ resolve DNS (fallback cho preconnect) -->
+<link rel="dns-prefetch" href="https://api.example.com">
+
+<!-- preload: tải tài nguyên quan trọng, ưu tiên cao -->
+<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="hero.avif" as="image" fetchpriority="high">
+<link rel="preload" href="critical.css" as="style">
+
+<!-- prefetch: tải trước cho điều hướng tương lai -->
+<link rel="prefetch" href="/trang-tiep-theo.html">
+
+<!-- modulepreload: tải trước ES module và dependencies -->
+<link rel="modulepreload" href="/js/app.js">
+
+<!-- prerender/Speculation Rules: tải trước trang tiếp theo (Chrome) -->
+<script type="speculationrules">
+{
+  "prefetch": [{
+    "source": "document",
+    "where": { "href_matches": "/bai-viet/*" },
+    "eagerness": "moderate"
+  }]
+}
+</script>

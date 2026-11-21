@@ -1,0 +1,20 @@
+<!-- Breadcrumb semantic + JSON-LD -->
+<nav aria-label="Breadcrumb">
+    <ol>
+        <li><a href="/">Trang chủ</a></li>
+        <li><a href="/hoc-lap-trinh">Học lập trình</a></li>
+        <li aria-current="page">HTML</li>
+    </ul>
+</ol>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://webviet.vn/" },
+    { "@type": "ListItem", "position": 2, "name": "Học lập trình", "item": "https://webviet.vn/hoc-lap-trinh" },
+    { "@type": "ListItem", "position": 3, "name": "HTML" }
+  ]
+}
+</script>

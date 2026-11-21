@@ -2,16 +2,11 @@
 
 ## 6.1. Phần tử `<form>`
 
-`<form>` là vùng chứa các phần tử tương tác để người dùng nhập và gửi dữ liệu.
+Mục này mở đầu phần biểu mẫu: `<form>` — chiếc "giấy khai" mà người dùng điền và gửi đi, cùng các thuộc tính điều khiển nơi gửi và cách gửi.
 
-```html
-<form action="/dang-ky" method="post">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
+`<form>` là vùng chứa các phần tử tương tác để người dùng nhập và gửi dữ liệu — hãy hình dung nó như tấm phiếu đăng ký ở quầy lễ tân: phần nhân viên (server) nhận là phần form submit.
 
-    <button type="submit">Đăng ký</button>
-</form>
-```
+> 📄 **Code ví dụ:** [`examples/01-6-1-phan-tu-form.html`](examples/01-6-1-phan-tu-form.html)
 
 ### Thuộc tính quan trọng của `<form>`
 
@@ -24,203 +19,79 @@
 | `autocomplete` | Bật/tắt gợi ý điền tự động cho toàn form |
 | `target` | Nơi hiển thị kết quả (`_self`, `_blank`, iframe) |
 
-```html
-<!-- Form upload file: bắt buộc multipart/form-data -->
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="anh" accept="image/*" required>
-    <button type="submit">Tải lên</button>
-</form>
-```
+> **Cách đọc bảng này:** hai dòng đầu (`action`, `method`) là "gửi đến đâu và gửi thế nào" — nhớ 2 dòng này trước; các dòng còn lại là tinh chỉnh khi cần.
+
+> 📄 **Code ví dụ:** [`examples/02-thuoc-tinh-quan-trong-cua-form.html`](examples/02-thuoc-tinh-quan-trong-cua-form.html)
+
+> **Tóm gọn 1 câu:** `<form>` là tấm phiếu đăng ký — `action` ghi địa chỉ nhận, `method` chọn đường chuyển (get/post), còn lại là tinh chỉnh thêm.
 
 ---
 
 ## 6.2. `<label>` — Luôn gắn nhãn cho input
 
-```html
-<!-- Cách 1: for + id (rõ ràng nhất) -->
-<label for="ho-ten">Họ và tên</label>
-<input type="text" id="ho-ten" name="ho-ten">
+Mục này nói về "nhãn dán bắt buộc" của mỗi ô nhập: `<label>` — nhỏ mà thiếu là người dùng màn hình bơ vơ.
 
-<!-- Cách 2: bọc input trong label -->
-<label>
-    Họ và tên
-    <input type="text" name="ho-ten">
-</label>
-```
+> 📄 **Code ví dụ:** [`examples/03-6-2-label-luon-gan-nhan-cho-input.html`](examples/03-6-2-label-luon-gan-nhan-cho-input.html)
 
 > **Bắt buộc về accessibility:** Mỗi input phải có label. Input không có label → screen reader đọc rời rạc, vùng click nhỏ hơn, vi phạm WCAG 3.3.2 (Labels or Instructions).
+
+> **Tóm gọn 1 câu:** Input không có label như chai thuốc không dán nhãn — người dùng không biết bên trong là gì, và đó là lỗi a11y đích thực.
 
 ---
 
 ## 6.3. Các `type` của `<input>`
 
+Mục này giới thiệu "tủ đồ các loại ô nhập": chọn đúng `type` là trình duyệt tự cho đúng bàn phím, đúng validation, đúng trải nghiệm.
+
 ### Input văn bản và số
 
-```html
-<input type="text" name="ten">
-<input type="email" name="email" multiple>          <!-- kiểm tra định dạng email -->
-<input type="password" name="mat-khau" autocomplete="new-password">
-<input type="search" name="q">                       <!-- ô tìm kiếm -->
-<input type="url" name="website">                    <!-- kiểm tra URL -->
-<input type="tel" name="sdt" pattern="[0-9]{10}">    <!-- không validate tự động -->
-<input type="number" name="tuoi" min="18" max="100" step="1">
-<input type="range" name="muc-do" min="0" max="10">
-```
+> 📄 **Code ví dụ:** [`examples/04-input-van-ban-va-so.html`](examples/04-input-van-ban-va-so.html)
 
 ### Input ngày giờ
 
-```html
-<input type="date" name="ngay-sinh">
-<input type="time" name="gio-hen">
-<input type="datetime-local" name="hen-gio">
-<input type="month" name="thang">
-<input type="week" name="tuan">
-```
+> 📄 **Code ví dụ:** [`examples/05-input-ngay-gio.html`](examples/05-input-ngay-gio.html)
 
 ### Input khác
 
-```html
-<input type="checkbox" name="dong-y" required>
-<input type="radio" name="gioi-tinh" value="nam">
-<input type="radio" name="gioi-tinh" value="nu">
-<input type="file" name="avatar" accept="image/png, image/jpeg" multiple>
-<input type="color" name="mau-yeu-thich">
-<input type="hidden" name="csrf-token" value="abc123">
-<input type="submit" value="Gửi">   <!-- khuyến khích dùng <button> thay thế -->
-```
+> 📄 **Code ví dụ:** [`examples/06-input-khac.html`](examples/06-input-khac.html)
 
 ---
 
 ## 6.4. `<textarea>`, `<select>`, `<datalist>`
 
-```html
-<!-- Textarea: văn bản nhiều dòng -->
-<label for="mo-ta">Mô tả</label>
-<textarea id="mo-ta" name="mo-ta" rows="5" cols="40" maxlength="500" placeholder="Nhập mô tả..."></textarea>
-
-<!-- Select: dropdown -->
-<label for="thanh-pho">Thành phố</label>
-<select id="thanh-pho" name="thanh-pho">
-    <option value="">-- Chọn --</option>
-    <optgroup label="Miền Bắc">
-        <option value="hanoi" selected>Hà Nội</option>
-        <option value="haiphong">Hải Phòng</option>
-    </optgroup>
-    <optgroup label="Miền Nam">
-        <option value="hcm">TP. Hồ Chí Minh</option>
-    </optgroup>
-</select>
-
-<!-- Select multiple -->
-<select name="ngon-ngu" multiple size="3">
-    <option value="vi">Tiếng Việt</option>
-    <option value="en">Tiếng Anh</option>
-    <option value="ja">Tiếng Nhật</option>
-</select>
-
-<!-- Datalist: input kết hợp gợi ý -->
-<label for="trinh-duyet">Trình duyệt</label>
-<input list="ds-trinh-duyet" id="trinh-duyet" name="trinh-duyet">
-<datalist id="ds-trinh-duyet">
-    <option value="Chrome">
-    <option value="Firefox">
-    <option value="Safari">
-</datalist>
-```
+> 📄 **Code ví dụ:** [`examples/07-6-4-textarea-select-datalist.html`](examples/07-6-4-textarea-select-datalist.html)
 
 ---
 
 ## 6.5. Validation HTML gốc (Client-side Validation)
 
+Mục này nói về "cửa kiểm đầu tiên": validation trình duyệt làm sẵn cho bạn — kiểm tra dữ liệu ngay khi người dùng gõ, trước khi gửi đi.
+
 ### Thuộc tính validation
 
-```html
-<form action="/dang-ky" method="post">
-    <!-- required: bắt buộc nhập -->
-    <input type="text" name="ten" required>
-
-    <!-- minlength / maxlength: độ dài -->
-    <input type="password" name="mk" minlength="8" maxlength="64" required>
-
-    <!-- min / max / step: giá trị số -->
-    <input type="number" name="tuoi" min="18" max="99">
-
-    <!-- pattern: regex -->
-    <input type="tel" name="sdt"
-           pattern="(0[3|5|7|8|9])+([0-9]{8})"
-           title="Số điện thoại Việt Nam 10 số, bắt đầu bằng 03/05/07/08/09">
-
-    <!-- Kết hợp nhiều điều kiện -->
-    <input type="email" name="email" required
-           pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
-</form>
-```
+> 📄 **Code ví dụ:** [`examples/08-thuoc-tinh-validation.html`](examples/08-thuoc-tinh-validation.html)
 
 ### Custom message lỗi bằng CSS và JS
 
-```css
-/* CSS: pseudo-classes validation */
-input:valid       { border-color: green; }
-input:invalid     { border-color: red; }
-input:invalid:not(:placeholder-shown) { border-color: red; }  /* chỉ báo lỗi khi user đã gõ */
-input:user-invalid { border-color: red; }   /* chỉ khi user đã tương tác (mới, Baseline 2024) */
-```
+> 📄 **Code ví dụ:** [`examples/09-custom-message-loi-bang-css-va-js.css`](examples/09-custom-message-loi-bang-css-va-js.css)
 
-```javascript
-// JS: tùy biến thông báo lỗi
-const email = document.querySelector('#email');
-email.addEventListener('invalid', (e) => {
-    if (email.validity.typeMismatch) {
-        email.setCustomValidity('Vui lòng nhập email hợp lệ, ví dụ: ten@gmail.com');
-    } else {
-        email.setCustomValidity('');
-    }
-});
-```
+> 📄 **Code ví dụ:** [`examples/10-custom-message-loi-bang-css-va-js.js`](examples/10-custom-message-loi-bang-css-va-js.js)
 
-```html
-<!-- Hiển thị lỗi không chặn submit bằng aria-live -->
-<label for="email">Email</label>
-<input type="email" id="email" aria-describedby="email-error" required>
-<p id="email-error" aria-live="polite"></p>
-```
+> 📄 **Code ví dụ:** [`examples/11-custom-message-loi-bang-css-va-js.html`](examples/11-custom-message-loi-bang-css-va-js.html)
 
 > **Nguyên tắc:** Validation client-side chỉ là **trải nghiệm người dùng** — luôn validate lại ở server. Đừng tin dữ liệu từ client.
+
+> **Tóm gọn 1 câu:** Validation client là "lễ tân mời khách kiểm tra áo", validation server là "cổng an ninh soát vé" — vui thì có lễ tân, nhưng cửa an ninh phải luôn đứng đó.
 
 ---
 
 ## 6.6. Autocomplete API — Điền tự động thông minh
 
+Mục này nói về cách để trình duyệt "điền giùm" form: thuộc tính `autocomplete` — người dùng bớt gõ, mật khẩu an toàn hơn.
+
 Thuộc tính `autocomplete` giúp trình duyệt điền dữ liệu đã lưu (địa chỉ, thẻ, mật khẩu).
 
-```html
-<form action="/thanh-toan" method="post" autocomplete="on">
-    <!-- Thông tin cá nhân -->
-    <input type="text" name="ho" autocomplete="family-name">
-    <input type="text" name="ten" autocomplete="given-name">
-    <input type="email" name="email" autocomplete="email">
-    <input type="tel" name="sdt" autocomplete="tel">
-
-    <!-- Địa chỉ (token nhóm) -->
-    <input type="text" name="dia-chi" autocomplete="street-address">
-    <input type="text" name="tinh" autocomplete="address-level1">
-    <input type="text" name="quan" autocomplete="address-level2">
-    <input type="text" name="ma-buu-dien" autocomplete="postal-code">
-
-    <!-- Thẻ tín dụng -->
-    <input type="text" name="so-the" autocomplete="cc-number">
-    <input type="text" name="ten-tren-the" autocomplete="cc-name">
-    <input type="text" name="han-the" autocomplete="cc-exp">
-
-    <!-- Mật khẩu: các giá trị quan trọng cho password manager -->
-    <input type="password" name="mk-hien-tai" autocomplete="current-password">
-    <input type="password" name="mk-moi" autocomplete="new-password">
-
-    <!-- OTP một lần -->
-    <input type="text" name="otp" autocomplete="one-time-code"
-           inputmode="numeric" pattern="[0-9]{6}">
-</form>
-```
+> 📄 **Code ví dụ:** [`examples/12-6-6-autocomplete-api-ien-tu-ong-thong.html`](examples/12-6-6-autocomplete-api-ien-tu-ong-thong.html)
 
 ### Giá trị `autocomplete` thường dùng nhất
 
@@ -239,113 +110,63 @@ Thuộc tính `autocomplete` giúp trình duyệt điền dữ liệu đã lưu 
 | `username` | Tên đăng nhập |
 | `off` | Tắt autocomplete |
 
+> **Cách đọc bảng này:** cột trái là "từ khóa" viết đúng chính tả vào thuộc tính `autocomplete`, cột phải là dữ liệu tương ứng — dò theo trường bạn đang làm rồi copy nguyên giá trị sang, đừng tự chế từ khóa.
+
 > **Lưu ý bảo mật:** Với trường mật khẩu, `autocomplete="new-password"` báo cho password manager sinh mật khẩu mạnh; `autocomplete="off"` trên password **không được trình duyệt tôn trọng** — đây là hành vi cố ý để bảo vệ người dùng.
+
+> **Tóm gọn 1 câu:** `autocomplete` đúng chuẩn là "phiếu thông tin điền sẵn" — người dùng bớt gõ, browser và password manager còn tự lo phần bảo mật.
 
 ---
 
 ## 6.7. `inputmode` — Bàn phím trên di động
 
-`inputmode` chọn **kiểu bàn phím ảo** mà không thay đổi type (giữ validation không đổi):
+Mục này nói về "bàn phím nào hiện lên": `inputmode` — chọn kiểu bàn phím ảo cho mobile mà không đụng vào validation.
 
-```html
-<input type="text" inputmode="numeric"  name="ma-bh">   <!-- bàn phím số -->
-<input type="text" inputmode="decimal"  name="gia">     <!-- số thập phân -->
-<input type="text" inputmode="tel"      name="sdt">     <!-- bàn phím điện thoại -->
-<input type="text" inputmode="email"    name="mail">    <!-- bàn phím có @ -->
-<input type="text" inputmode="url"      name="link">    <!-- bàn phím có /. -->
-<input type="text" inputmode="search"   name="q">       <!-- phím search -->
-```
+`inputmode` chọn **kiểu bàn phím ảo** mà không thay đổi type (giữ validation không đổi) — ví von: cùng một ô nhập, nhưng bạn chọn "ra bảng chữ số" hay "ra bảng chữ cái" cho ngón tay người dùng đỡ mỏi:
+
+> 📄 **Code ví dụ:** [`examples/13-6-7-inputmode-ban-phim-tren-di-ong.html`](examples/13-6-7-inputmode-ban-phim-tren-di-ong.html)
 
 ---
 
 ## 6.8. `<fieldset>` và `<legend>` — Nhóm trường
 
-```html
-<fieldset>
-    <legend>Thông tin liên hệ</legend>
-    <label for="dt">Điện thoại</label>
-    <input type="tel" id="dt" name="dt">
-    <label for="dc">Địa chỉ</label>
-    <input type="text" id="dc" name="dc">
-</fieldset>
-```
+Mục này nói về "khuôn nhóm": `<fieldset>` bọc một nhóm trường liên quan, `<legend>` đặt tên cho cả nhóm.
 
-Screen reader đọc `legend` trước khi vào từng trường → nhóm có ngữ cảnh rõ ràng.
+> 📄 **Code ví dụ:** [`examples/14-6-8-fieldset-va-legend-nhom-truong.html`](examples/14-6-8-fieldset-va-legend-nhom-truong.html)
+
+Screen reader đọc `legend` trước khi vào từng trường → nhóm có ngữ cảnh rõ ràng — như người dẫn chương trình giới thiệu tên mục trước khi đọc từng câu hỏi.
 
 ---
 
 ## 6.9. Progress, Meter, Output
 
-```html
-<!-- Progress: tiến trình công việc -->
-<label for="tai">Đang tải:</label>
-<progress id="tai" value="70" max="100">70%</progress>
+Mục này giới thiệu ba thẻ "hiển thị số liệu": thanh tiến độ, thước đo, và kết quả tính toán — thay vì tự vẽ bằng div và JS.
 
-<!-- Meter: mức đo trong phạm vi đã biết -->
-<label for="dia">Dung lượng ổ đĩa:</label>
-<meter id="dia" value="0.6" min="0" max="1" low="0.3" high="0.8" optimum="0.2">60%</meter>
-
-<!-- Output: kết quả tính toán -->
-<form oninput="kq.value = Number(a.value) + Number(b.value)">
-    <input type="number" id="a" value="5"> +
-    <input type="number" id="b" value="3"> =
-    <output name="kq" for="a b">8</output>
-</form>
-```
+> 📄 **Code ví dụ:** [`examples/15-6-9-progress-meter-output.html`](examples/15-6-9-progress-meter-output.html)
 
 ---
 
 ## 6.10. Form hiện đại: các tính năng 2025–2026
 
+Mục này là "tin nóng" của form: những tính năng mới nhất khiến form làm được nhiều việc mà trước đây phải viết JS.
+
 ### `requestSubmit()` và submit từ JS
 
-```javascript
-// Gửi form như thể người dùng bấm nút submit (chạy validation)
-form.requestSubmit();
-
-// Gửi không validation
-form.submit();
-```
+> 📄 **Code ví dụ:** [`examples/16-requestsubmit-va-submit-tu-js.js`](examples/16-requestsubmit-va-submit-tu-js.js)
 
 ### `<form>` với `formmethod`, `formaction` trên button
 
-```html
-<form action="/mac-dinh" method="post">
-    <button type="submit">Lưu nháp</button>
-    <button type="submit" formaction="/xuat-ban" formmethod="post">Xuất bản</button>
-    <button type="submit" formtarget="_blank">Xem trước (tab mới)</button>
-</form>
-```
+> 📄 **Code ví dụ:** [`examples/17-form-voi-formmethod-formaction-tren-button.html`](examples/17-form-voi-formmethod-formaction-tren-button.html)
 
 ### Customizable `<select>` (rất mới, 2025)
 
-```html
-<!-- Chrome 135+, Safari 27+; chưa có Firefox — cần feature-detect -->
-<select>
-    <button>
-        <selectedcontent></selectedcontent>  <!-- phản chiếu option đang chọn -->
-    </button>
-    <option value="hn">🇻🇳 Hà Nội</option>
-    <option value="sg">🇻🇳 Sài Gòn</option>
-</select>
-<style>
-  select, ::picker(select) { appearance: base-select; }
-</style>
-```
+> 📄 **Code ví dụ:** [`examples/18-customizable-select-rat-moi-2025.html`](examples/18-customizable-select-rat-moi-2025.html)
 
 > `selectedcontent` hỗ trợ: **Chrome 135+ (4/2025), Edge 135+, Safari 27+**. Firefox chưa hỗ trợ — kiểm tra tại [caniuse](https://caniuse.com/mdn-html_elements_selectedcontent). Đây là tính năng trong nhóm "Customizable Select" — đang được WHATWG + OpenUI phát triển.
 
 ### `<search>` element
 
-```html
-<search>
-    <form action="/tim-kiem">
-        <label for="q">Tìm kiếm</label>
-        <input type="search" id="q" name="q">
-        <button type="submit">Tìm</button>
-    </form>
-</search>
-```
+> 📄 **Code ví dụ:** [`examples/19-search-element.html`](examples/19-search-element.html)
 
 `<search>` (thêm vào Living Standard 2023) tạo landmark `search` cho screen reader.
 
@@ -368,6 +189,8 @@ form.submit();
 - ✅ Validation client-side chỉ để UX — luôn validate lại server-side
 - ✅ `inputmode` chọn bàn phím ảo trên di động
 - ✅ Customizable `<select>` + `selectedcontent` là tính năng mới nhất 2025 (Chrome 135+)
+
+> **Tóm gọn 1 câu:** Form làm đúng chuẩn là: mỗi input có nhãn, `type` và `autocomplete` đúng vai — trình duyệt tự lo phần còn lại từ bàn phím đến bảo mật.
 
 ---
 

@@ -1,0 +1,15 @@
+<!-- Cho phép người dùng chỉnh sửa nội dung -->
+<div contenteditable="true">
+    <p>Bạn có thể sửa văn bản này!</p>
+</div>
+
+<!-- Chỉ cho phép chỉnh sửa văn bản thuần, không HTML -->
+<div contenteditable="plaintext-only">
+    <strong>Chỉ text</strong> <!-- HTML tags bị bỏ qua -->
+</div>
+
+<!-- Event handler -->
+<script>
+  document.querySelector('[contenteditable]')
+    .addEventListener('input', e => console.log(e.target.textContent));
+</script>

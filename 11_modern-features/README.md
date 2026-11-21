@@ -8,36 +8,15 @@ HTML Living Standard không ngừng bổ sung tính năng mới. Phần này t�
 
 ## 11.1. `<dialog>` — Hộp thoại native
 
-Phần tử `<dialog>` tạo modal/hộp thoại **không cần thư viện**, tự quản lý focus, top layer, và phím Esc.
+Mục này mở màn bằng "món quà" hay nhất của HTML hiện đại: `<dialog>` — modal có sẵn mọi thứ mà trước đây phải mướn cả một thư viện.
 
-```html
-<button commandfor="ho-tro" command="show-modal">Mở hỗ trợ</button>
+Phần tử `<dialog>` tạo modal/hộp thoại **không cần thư viện**, tự quản lý focus, top layer, và phím Esc. Hãy hình dung: trước đây bạn phải tự dựng sân khấu, làm đèn chiếu và gác cửa cho modal — giờ HTML cho sẵn cả gói.
 
-<dialog id="ho-tro">
-    <h2>Hỗ trợ trực tuyến</h2>
-    <p>Bạn cần giúp đỡ gì?</p>
-    <form method="dialog">
-        <button>Đóng</button>
-    </form>
-</dialog>
-```
+> 📄 **Code ví dụ:** [`examples/01-11-1-dialog-hop-thoai-native.html`](examples/01-11-1-dialog-hop-thoai-native.html)
 
-```css
-/* Backdrop tự sinh */
-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
-}
-```
+> 📄 **Code ví dụ:** [`examples/02-11-1-dialog-hop-thoai-native.css`](examples/02-11-1-dialog-hop-thoai-native.css)
 
-```javascript
-const dlg = document.querySelector('#ho-tro');
-dlg.showModal();               // mở modal (chặn tương tác nền)
-dlg.show();                    // mở non-modal
-dlg.close('reason');           // đóng, truyền giá trị
-dlg.requestClose();            // đóng "nhẹ nhàng" — có thể bị chặn bằng sự kiện cancel (Baseline 2025)
-dlg.addEventListener('close', () => console.log(dlg.returnValue));
-```
+> 📄 **Code ví dụ:** [`examples/03-11-1-dialog-hop-thoai-native.js`](examples/03-11-1-dialog-hop-thoai-native.js)
 
 ### Hỗ trợ trình duyệt
 
@@ -48,19 +27,19 @@ dlg.addEventListener('close', () => console.log(dlg.returnValue));
 | `requestClose()` | 137+ (Baseline 2025) | 136+ | 18.4+ |
 | `closedby` (light dismiss) | 134+ | — | 26+ |
 
+> **Cách đọc bảng này:** mỗi dòng là một năng lực của `<dialog>`, ba cột sau cho biết từng trình duyệt "bật đèn xanh" từ phiên bản nào — dòng cuối là tính năng mới nhất, còn thiếu Firefox nên dùng có dự phòng.
+
 ### Thuộc tính `closedby` — Light dismiss cho dialog (mới 2025)
 
-```html
-<!-- Đóng khi bấm ngoài hoặc Esc -->
-<dialog id="sheet" closedby="any">...</dialog>
+> 📄 **Code ví dụ:** [`examples/04-thuoc-tinh-closedby-light-dismiss-cho-dialog-moi.html`](examples/04-thuoc-tinh-closedby-light-dismiss-cho-dialog-moi.html)
 
-<!-- Chỉ đóng bằng Esc / nút close -->
-<dialog id="modal" closedby="closerequest">...</dialog>
-```
+> **Tóm gọn 1 câu:** `<dialog>` là modal "ăn liền" của HTML — mở hộp là có focus trap, top layer và Esc, không cần mua thêm thư viện nào.
 
 ---
 
 ## 11.2. Popover API — Baseline 2025
+
+Mục này nói về "chị em" của dialog: Popover API — tooltip, menu, dropdown thuần HTML với top layer và light dismiss có sẵn.
 
 **Popover API** tạo popover (tooltip, menu, dropdown) **thuần HTML**, có top layer, light dismiss, focus management tự động.
 
@@ -68,134 +47,45 @@ dlg.addEventListener('close', () => console.log(dlg.returnValue));
 
 ### Popover cơ bản
 
-```html
-<button popovertarget="menu">Mở menu</button>
-<button popovertarget="menu" popovertargetaction="hide">Đóng menu</button>
-
-<div id="menu" popover>
-    <ul>
-        <li><a href="/ho-so">Hồ sơ</a></li>
-        <li><a href="/cai-dat">Cài đặt</a></li>
-    </ul>
-</div>
-```
+> 📄 **Code ví dụ:** [`examples/05-popover-co-ban.html`](examples/05-popover-co-ban.html)
 
 ### Hai chế độ: `auto` và `manual`
 
-```html
-<!-- auto: light dismiss — bấm ngoài tự đóng, mở popover mới đóng popover cũ -->
-<div id="menu" popover="auto">...</div>
-
-<!-- manual: không tự đóng, kiểm soát hoàn toàn bằng JS -->
-<div id="hud" popover="manual">...</div>
-```
+> 📄 **Code ví dụ:** [`examples/06-hai-che-o-auto-va-manual.html`](examples/06-hai-che-o-auto-va-manual.html)
 
 ### JavaScript API
 
-```javascript
-const pop = document.querySelector('#menu');
-
-pop.showPopover();
-pop.hidePopover();
-pop.togglePopover();
-
-// Sự kiện
-pop.addEventListener('beforetoggle', (e) => {
-    console.log('Sắp:', e.newState);   // "open" | "closed"
-});
-pop.addEventListener('toggle', (e) => {
-    console.log('Đã:', e.newState);
-});
-```
+> 📄 **Code ví dụ:** [`examples/07-javascript-api.js`](examples/07-javascript-api.js)
 
 ### CSS đi kèm
 
-```css
-/* Trạng thái mở */
-#menu:popover-open {
-    display: block;
-}
-
-/* Chuyển động với @starting-style (Chrome 117+, Safari 17.5+, Firefox 129+) */
-#menu {
-    opacity: 0;
-    transition: opacity 0.2s, display 0.2s allow-discrete;
-}
-#menu:popover-open {
-    opacity: 1;
-    @starting-style { opacity: 0; }
-}
-```
+> 📄 **Code ví dụ:** [`examples/08-css-i-kem.css`](examples/08-css-i-kem.css)
 
 ### Polyfill cho trình duyệt cũ
 
-```html
-<script type="module">
-  if (!HTMLElement.prototype.hasOwnProperty('popover')) {
-    import('@oddbird/popover-polyfill');
-  }
-</script>
-```
+> 📄 **Code ví dụ:** [`examples/09-polyfill-cho-trinh-duyet-cu.html`](examples/09-polyfill-cho-trinh-duyet-cu.html)
 
 ---
 
 ## 11.3. Invoker Commands API — nút điều khiển không cần JS (Baseline 2025)
 
+Mục này nói về "remote không cần pin": Invoker Commands — một nút bấm điều khiển dialog/popover thuần HTML, không viết một dòng JS.
+
 > **Hỗ trợ:** Chrome 135+ (4/2025), Edge 135+, **Firefox 144+** (10/2025), Safari 26.2 (12/2025). Baseline Newly available kể từ 12/12/2025.
 
-```html
-<!-- Mở/đóng dialog không cần JavaScript! -->
-<button commandfor="dlg" command="show-modal">Mở</button>
-<button commandfor="dlg" command="close">Đóng</button>
+> 📄 **Code ví dụ:** [`examples/10-11-3-invoker-commands-api-nut-ieu-khien.html`](examples/10-11-3-invoker-commands-api-nut-ieu-khien.html)
 
-<dialog id="dlg">Nội dung</dialog>
-
-<!-- Điều khiển popover -->
-<button commandfor="pop" command="show-popover">Hiện</button>
-<button commandfor="pop" command="hide-popover">Ẩn</button>
-<button commandfor="pop" command="toggle-popover">Bật/tắt</button>
-<div id="pop" popover>Nội dung popover</div>
-
-<!-- Custom command -->
-<button commandfor="app" command="--show-confetti">🎉</button>
-<script>
-  document.querySelector('#app').addEventListener('command', (e) => {
-    if (e.command === '--show-confetti') fireConfetti();
-  });
-</script>
-```
+> **Tóm gọn 1 câu:** Invoker Commands là "điều khiển từ xa không pin": `commandfor` + `command` nối nút với dialog/popover mà không cần một dòng JS.
 
 ---
 
 ## 11.4. `<template>` — Nội dung không render
 
+Mục này nói về "khuôn bánh chưa đổ bột": `<template>` — chứa sẵn HTML làm khuôn, nhân bản bằng JS lúc cần mà không hiển thị lúc tải trang.
+
 `<template>` chứa HTML **không được render** khi tải trang, dùng làm khuôn mẫu nhân bản bằng JS:
 
-```html
-<template id="card-template">
-    <article class="card">
-        <h3 class="card-title"></h3>
-        <p class="card-desc"></p>
-    </article>
-</template>
-
-<div id="list"></div>
-
-<script>
-  const tpl = document.querySelector('#card-template');
-  const data = [
-    { title: 'Bài viết 1', desc: 'Nội dung 1' },
-    { title: 'Bài viết 2', desc: 'Nội dung 2' },
-  ];
-
-  for (const item of data) {
-    const node = tpl.content.cloneNode(true);   // nhân bản khuôn mẫu
-    node.querySelector('.card-title').textContent = item.title;
-    node.querySelector('.card-desc').textContent = item.desc;
-    document.querySelector('#list').append(node);
-  }
-</script>
-```
+> 📄 **Code ví dụ:** [`examples/11-11-4-template-noi-dung-khong-render.html`](examples/11-11-4-template-noi-dung-khong-render.html)
 
 **Ưu điểm:** Nội dung trong `<template>` được parse (kiểm tra lỗi sớm) nhưng inert — không tải ảnh, không chạy script, không nằm trong DOM chính.
 
@@ -203,66 +93,23 @@ pop.addEventListener('toggle', (e) => {
 
 ## 11.5. Custom Elements — tự tạo thẻ HTML
 
+Mục này nói về "tự đúc thẻ riêng": Web Components — Custom Elements, Shadow DOM, `<template>` — cho phép bạn chế thẻ của riêng mình.
+
 **Web Components** gồm 3 công nghệ: Custom Elements, Shadow DOM, `<template>`. Custom Elements cho phép tạo thẻ riêng:
 
-```javascript
-// Định nghĩa custom element <count-up>
-class CountUp extends HTMLElement {
-  connectedCallback() {
-    this.count = 0;
-    this.innerHTML = `<button type="button">Bấm: ${this.count}</button>`;
-    this.querySelector('button').addEventListener('click', () => {
-      this.count++;
-      this.querySelector('button').textContent = `Bấm: ${this.count}`;
-    });
-  }
-}
+> 📄 **Code ví dụ:** [`examples/12-11-5-custom-elements-tu-tao-the-html.js`](examples/12-11-5-custom-elements-tu-tao-the-html.js)
 
-customElements.define('count-up', CountUp);
-```
-
-```html
-<!-- Sử dụng -->
-<count-up></count-up>
-```
+> 📄 **Code ví dụ:** [`examples/13-11-5-custom-elements-tu-tao-the-html.html`](examples/13-11-5-custom-elements-tu-tao-the-html.html)
 
 ### Element với Shadow DOM (encapsulated styles)
 
-```javascript
-class MyCard extends HTMLElement {
-  connectedCallback() {
-    const shadow = this.attachShadow({ mode: 'open' });
-    shadow.innerHTML = `
-      <style>
-        :host { display: block; border: 1px solid #ddd; border-radius: 8px; padding: 12px; }
-        ::slotted(h3) { margin: 0 0 8px; }
-      </style>
-      <slot name="title"></slot>
-      <slot></slot>
-    `;
-  }
-}
-customElements.define('my-card', MyCard);
-```
+> 📄 **Code ví dụ:** [`examples/14-element-voi-shadow-dom-encapsulated-styles.js`](examples/14-element-voi-shadow-dom-encapsulated-styles.js)
 
-```html
-<my-card>
-    <h3 slot="title">Tiêu đề</h3>
-    <p>Nội dung đi vào slot mặc định.</p>
-</my-card>
-```
+> 📄 **Code ví dụ:** [`examples/15-element-voi-shadow-dom-encapsulated-styles.html`](examples/15-element-voi-shadow-dom-encapsulated-styles.html)
 
 ### Declarative Shadow DOM (SSR cho Web Components)
 
-```html
-<my-card>
-    <template shadowrootmode="open">
-        <style>:host { display: block; padding: 12px; }</style>
-        <slot></slot>
-    </template>
-    <p>Nội dung render từ server!</p>
-</my-card>
-```
+> 📄 **Code ví dụ:** [`examples/16-declarative-shadow-dom-ssr-cho-web-components.html`](examples/16-declarative-shadow-dom-ssr-cho-web-components.html)
 
 > Declarative Shadow DOM được hỗ trợ: Chrome 111+, Safari 16.4+, Firefox 123+ — cho phép Web Components render phía server không cần JS.
 
@@ -270,30 +117,13 @@ customElements.define('my-card', MyCard);
 
 ## 11.6. Customizable `<select>` (2025 — rất mới)
 
+Mục này là "tin mới nhất trên kệ": Customizable `<select>` — dropdown cuối cùng chịu khuôn CSS, nhưng còn non nên phải có phương án dự phòng.
+
 Cuối cùng, `<select>` có thể style hoàn toàn bằng CSS:
 
-```html
-<label for="mon">Chọn nhân vật</label>
-<select id="mon">
-    <button>
-        <selectedcontent></selectedcontent>   <!-- phản chiếu option đang chọn -->
-    </button>
-    <option value="dragon">🐉 Rồng lửa</option>
-    <option value="wolf">🐺 Sói bạc</option>
-</select>
-```
+> 📄 **Code ví dụ:** [`examples/17-11-6-customizable-select-2025-rat-moi.html`](examples/17-11-6-customizable-select-2025-rat-moi.html)
 
-```css
-/* Bật chế độ customizable */
-select,
-select::picker(select) {
-    appearance: base-select;
-}
-
-/* Style từng phần */
-select::picker-icon { color: crimson; }        /* mũi tên */
-option:checked::checkmark { color: green; }     /* dấu check */
-```
+> 📄 **Code ví dụ:** [`examples/18-11-6-customizable-select-2025-rat-moi.css`](examples/18-11-6-customizable-select-2025-rat-moi.css)
 
 > **Hỗ trợ:** Chrome 134/135+ (3–4/2025), Edge 135+, Safari 27+. **Firefox chưa hỗ trợ** — theo dõi tại [caniuse/selectedcontent](https://caniuse.com/mdn-html_elements_selectedcontent). Chỉ dùng khi có fallback hợp lý.
 
@@ -301,53 +131,29 @@ option:checked::checkmark { color: green; }     /* dấu check */
 
 ## 11.7. Các tính năng nhỏ nhưng hữu ích (2024–2026)
 
+Mục này là "túi đồ lặt vặt mà đáng giá": những tính năng nhỏ hơn của giai đoạn 2024–2026, mỗi món giải quyết một việc cụ thể.
+
 ### `popover="hint"` và Interest Invokers (đang phát triển)
 
-```html
-<!-- popover hint: không đóng các popover khác, dành cho tooltip -->
-<button interestfor="tooltip">Tôi là gì?</button>
-<div id="tooltip" popover="hint">Chú thích hiện khi hover/focus</div>
-```
+> 📄 **Code ví dụ:** [`examples/19-popover-hint-va-interest-invokers-ang-phat-trien.html`](examples/19-popover-hint-va-interest-invokers-ang-phat-trien.html)
 
 > `popover="hint"` và `interestfor`: Chrome 133+ (thử nghiệm), chưa phổ biến.
 
 ### `<input>` mới và thuộc tính mới
 
-```html
-<!-- showPicker(): mở picker bằng JS (Chrome 99+, Safari 16+, Firefox 101+) -->
-<input type="date" id="ngay">
-<script>document.querySelector('#ngay').showPicker();</script>
-
-<!-- toggleevent / switch role -->
-<input type="checkbox" switch>   <!-- giao diện switch (Chrome 134+) -->
-```
+> 📄 **Code ví dụ:** [`examples/20-input-moi-va-thuoc-tinh-moi.html`](examples/20-input-moi-va-thuoc-tinh-moi.html)
 
 ### `<search>` element (2023, dùng rộng rãi 2025+)
 
-```html
-<search>
-    <form action="/tim"><input type="search" name="q"><button>Tìm</button></form>
-</search>
-```
+> 📄 **Code ví dụ:** [`examples/21-search-element-2023-dung-rong-rai-2025.html`](examples/21-search-element-2023-dung-rong-rai-2025.html)
 
 ### `contenteditable="plaintext-only"` — Baseline 2025
 
-```html
-<div contenteditable="plaintext-only">Chỉ cho gõ văn bản thuần.</div>
-```
+> 📄 **Code ví dụ:** [`examples/22-contenteditable-plaintext-only-baseline-2025.html`](examples/22-contenteditable-plaintext-only-baseline-2025.html)
 
 ### `<details name="...">` — Accordion native
 
-```html
-<details name="faq">
-    <summary>Câu hỏi 1?</summary>
-    <p>Trả lời 1.</p>
-</details>
-<details name="faq">
-    <summary>Câu hỏi 2?</summary>
-    <p>Mở cái này thì cái kia tự đóng (Chrome 120+, Safari 17.2+, Firefox 130+).</p>
-</details>
-```
+> 📄 **Code ví dụ:** [`examples/23-details-name-accordion-native.html`](examples/23-details-name-accordion-native.html)
 
 ---
 
@@ -364,6 +170,10 @@ option:checked::checkmark { color: green; }     /* dấu check */
 | Declarative Shadow DOM | 111 | 123 | 16.4 | 2024 |
 | `dialog closedby` | 134 | ❌ | 26 | Newly |
 | Interest Invokers / `popover="hint"` | 133+ | ❌ | ❌ | Thử nghiệm |
+
+> **Cách đọc bảng này:** đọc theo từng dòng, cột "Baseline" là điểm quan trọng nhất — **2025** nghĩa là đã ổn định trên cả 3 engine, "Newly" là mới có cần fallback, "Thử nghiệm" là chưa dùng cho production; ba cột phiên bản chỉ để tra khi cần hỗ trợ trình duyệt cũ.
+
+> **Tóm gọn 1 câu:** Bảng trên là "bản đồ điểm sáng" của HTML hiện đại — ưu tiên gì đã Baseline 2025, dự phòng gì còn Newly, tạm bỏ qua gì đang thử nghiệm.
 
 ---
 
@@ -385,6 +195,8 @@ option:checked::checkmark { color: green; }     /* dấu check */
 - ✅ **Invoker Commands** (Baseline 2025): `commandfor`/`command` — điều khiển không cần JS
 - ✅ `<template>` + Custom Elements + Declarative Shadow DOM = Web Components
 - ✅ Customizable `<select>` + `selectedcontent` — mới nhất, chưa full support, cần fallback
+
+> **Tóm gọn 1 câu:** HTML hiện đại thay cả một thùng thư viện JS: `<dialog>` cho modal, Popover cho menu nổi, Invoker Commands cho nút điều khiển — chỉ cần nhớ tra Baseline trước khi dùng.
 
 ---
 

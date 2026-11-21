@@ -1,0 +1,5 @@
+/* CSS: pseudo-classes validation */
+input:valid       { border-color: green; }
+input:invalid     { border-color: red; }
+input:invalid:not(:placeholder-shown) { border-color: red; }  /* chỉ báo lỗi khi user đã gõ */
+input:user-invalid { border-color: red; }   /* chỉ khi user đã tương tác (mới, Baseline 2024) */

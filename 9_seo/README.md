@@ -2,7 +2,9 @@
 
 ## 9.1. HTML và SEO — Mối quan hệ cốt lõi
 
-**SEO (Search Engine Optimization)** là tối ưu trang để công cụ tìm kiếm hiểu và xếp hạng. HTML là **tín hiệu đầu tiên** mà bot đọc:
+Mục này trả lời câu hỏi "HTML liên quan gì đến SEO": tại sao những dòng metadata viết ở phần 2 lại là tín hiệu đầu tiên quyết định thứ hạng.
+
+**SEO (Search Engine Optimization)** là tối ưu trang để công cụ tìm kiếm hiểu và xếp hạng. HTML là **tín hiệu đầu tiên** mà bot đọc — giống như CV là thứ nhà tuyển dụng đọc trước khi gọi phỏng vấn:
 
 ```
 Bot Google → Tải HTML → Đọc <title>, <meta>, headings, semantic structure → Index → Xếp hạng
@@ -14,14 +16,15 @@ Bot Google → Tải HTML → Đọc <title>, <meta>, headings, semantic structu
 2. **Cấu trúc ngữ nghĩa** (headings, semantic tags — xem [Phần 5](../5_semantic/README.md))
 3. **Dữ liệu có cấu trúc** (Schema.org / JSON-LD)
 
+> **Tóm gọn 1 câu:** Bot đọc HTML trước khi "nhìn" bất cứ thứ gì — viết metadata chuẩn là nộp CV sạch ngay từ vòng duyệt hồ sơ.
+
 ---
 
 ## 9.2. `<title>` — Yếu tố xếp hạng quan trọng nhất trong `<head>`
 
-```html
-<!-- Công thức: [Từ khóa chính] — [Lợi ích] | [Thương hiệu] -->
-<title>Học HTML từ cơ bản đến nâng cao (2026) — WebViet</title>
-```
+Mục này nói về "tấm biển vàng" của SEO: thẻ `<title>` — yếu tố xếp hạng mạnh nhất trong `<head>`.
+
+> 📄 **Code ví dụ:** [`examples/01-9-2-title-yeu-to-xep-hang-quan.html`](examples/01-9-2-title-yeu-to-xep-hang-quan.html)
 
 ### Quy tắc
 
@@ -30,13 +33,15 @@ Bot Google → Tải HTML → Đọc <title>, <meta>, headings, semantic structu
 - **Duy nhất cho mỗi trang**
 - Không nhồi từ khóa ("HTML, học HTML, HTML cơ bản, HTML 2026")
 
+> **Tóm gọn 1 câu:** Title là "tấm biển vàng": từ khóa chính lên đầu, giới hạn 60 ký tự, mỗi trang một biển — nhồi nhét chỉ bị coi là biển quảng cáo lộn xộn.
+
 ---
 
 ## 9.3. `<meta name="description">`
 
-```html
-<meta name="description" content="Khóa học HTML tiếng Việt miễn phí: 12 phần từ cơ bản đến nâng cao, cập nhật chuẩn WHATWG 2026, kèm ví dụ thực hành.">
-```
+Mục này nói về "đoạn giới thiệu dưới biển hiệu": meta description — không tăng thứ hạng trực tiếp nhưng quyết định người dùng có bấm vào hay không.
+
+> 📄 **Code ví dụ:** [`examples/02-9-3-meta-name-description.html`](examples/02-9-3-meta-name-description.html)
 
 - **150–160 ký tự** là tối ưu
 - Không phải yếu tố xếp hạng trực tiếp, nhưng ảnh hưởng **CTR** trong SERP
@@ -47,12 +52,11 @@ Bot Google → Tải HTML → Đọc <title>, <meta>, headings, semantic structu
 
 ## 9.4. Canonical URL — chống trùng lặp nội dung
 
+Mục này nói về cách "chốt địa chỉ chính danh": canonical — khi một nội dung có nhiều đường vào, bạn phải chỉ cho Google đường nào là gốc.
+
 Khi cùng nội dung truy cập được qua nhiều URL, Google có thể index trùng lặp:
 
-```html
-<!-- Trang này là bản chính thức -->
-<link rel="canonical" href="https://webviet.vn/hoc-html">
-```
+> 📄 **Code ví dụ:** [`examples/03-9-4-canonical-url-chong-trung-lap-noi.html`](examples/03-9-4-canonical-url-chong-trung-lap-noi.html)
 
 ### Khi nào cần canonical
 
@@ -64,42 +68,32 @@ Khi cùng nội dung truy cập được qua nhiều URL, Google có thể index
 | Trang phân trang | `/danh-sach?page=2` |
 | Nội dung tổng hợp (syndicated) | Bài đăng lại từ nguồn khác |
 
+> **Cách đọc bảng này:** mỗi dòng là một "tình huống nhân bản" thường gặp — cột Ví dụ cho thấy nội dung tồn tại dưới mấy URL; gặp tình huống nào là cần dán canonical cho tình huống đó.
+
 ### Lưu ý
 
 - Canonical phải là **URL tuyệt đối** (`https://...`)
 - Không đặt canonical trỏ đến trang 404/noindex
 - Tự tham chiếu (self-canonical) trên mọi trang là best practice
 
+> **Tóm gọn 1 câu:** Canonical là "con dấu chỉ định bản chính" — nhiều bản in vẫn được, nhưng phải dán dấu để Google biết bản gốc ở đâu.
+
 ---
 
 ## 9.5. Open Graph — chia sẻ đẹp trên mạng xã hội
 
+Mục này nói về "thẻ namecard khi chia sẻ": Open Graph — quyết định bài của bạn hiện lên mạng xã hội đẹp hay xấu.
+
 **Open Graph (OG)** do Facebook phát triển, được Facebook, LinkedIn, Zalo, Slack, Discord... sử dụng:
 
-```html
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://webviet.vn/hoc-html">
-<meta property="og:title" content="Học HTML từ cơ bản đến nâng cao">
-<meta property="og:description" content="12 phần học HTML miễn phí, cập nhật chuẩn 2026.">
-<meta property="og:image" content="https://webviet.vn/og/hoc-html.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="vi_VN">
-<meta property="og:site_name" content="WebViet">
-```
+> 📄 **Code ví dụ:** [`examples/04-9-5-open-graph-chia-se-ep-tren.html`](examples/04-9-5-open-graph-chia-se-ep-tren.html)
 
 - `og:image` nên kích thước **1200×630 px** (< 5MB)
 - `og:type` phổ biến: `website`, `article`, `product`
 
 ### Twitter Card
 
-```html
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Học HTML từ cơ bản đến nâng cao">
-<meta name="twitter:description" content="12 phần học HTML miễn phí, chuẩn 2026.">
-<meta name="twitter:image" content="https://webviet.vn/og/hoc-html.jpg">
-<meta name="twitter:site" content="@webviet">
-```
+> 📄 **Code ví dụ:** [`examples/05-twitter-card.html`](examples/05-twitter-card.html)
 
 ### Công cụ kiểm tra
 
@@ -111,51 +105,17 @@ Khi cùng nội dung truy cập được qua nhiều URL, Google có thể index
 
 ## 9.6. Schema.org / JSON-LD — Dữ liệu có cấu trúc
 
-**JSON-LD** là cách Google khuyến nghị nhúng dữ liệu có cấu trúc — viết trong thẻ `<script type="application/ld+json">`.
+Mục này nói về "ngôn ngữ riêng cho máy": JSON-LD — cách mô tả trang bằng dữ liệu có cấu trúc để mở khóa rich results trên Google.
+
+**JSON-LD** là cách Google khuyến nghị nhúng dữ liệu có cấu trúc — viết trong thẻ `<script type="application/ld+json">`. Hãy hình dung đó là phần "giấy khai sinh" đi kèm trang: máy đọc được ngay đây là bài viết của ai, đăng khi nào, bán gì với giá bao nhiêu.
 
 ### Ví dụ Article (bài viết)
 
-```html
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Học HTML từ cơ bản đến nâng cao",
-  "image": "https://webviet.vn/og/hoc-html.jpg",
-  "author": {
-    "@type": "Person",
-    "name": "Nguyễn Sơn",
-    "url": "https://webviet.vn/author/ngson"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "WebViet",
-    "logo": { "@type": "ImageObject", "url": "https://webviet.vn/logo.png" }
-  },
-  "datePublished": "2026-10-20T09:00:00+07:00",
-  "dateModified": "2026-10-26T14:30:00+07:00",
-  "description": "Khóa học HTML tiếng Việt miễn phí theo chuẩn WHATWG 2026."
-}
-</script>
-```
+> 📄 **Code ví dụ:** [`examples/06-vi-du-article-bai-viet.html`](examples/06-vi-du-article-bai-viet.html)
 
 ### Ví dụ Organization + Website
 
-```html
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "WebViet",
-  "url": "https://webviet.vn",
-  "logo": "https://webviet.vn/logo.png",
-  "sameAs": [
-    "https://www.facebook.com/webviet",
-    "https://github.com/webviet"
-  ]
-}
-</script>
-```
+> 📄 **Code ví dụ:** [`examples/07-vi-du-organization-website.html`](examples/07-vi-du-organization-website.html)
 
 ### Các schema type thường dùng
 
@@ -172,47 +132,27 @@ Khi cùng nội dung truy cập được qua nhiều URL, Google có thể index
 | `VideoObject` | Video |
 | `BreadcrumbList` | Breadcrumb navigation |
 
+> **Cách đọc bảng này:** đây là "thực đơn" các loại schema — cột Type là tên khai báo, cột "Dùng cho" là loại trang tương ứng; chọn đúng đúng một loại cho đúng loại trang, đừng khai một món cho mọi món ăn.
+
 > **Lưu ý 2026:** Google đã **loại bỏ rich results cho HowTo** (09/2023) và thu hẹp FAQ rich results; tính năng Course info bị loại từ **31/12/2025** — hãy kiểm tra [trạng thái hiện tại](https://developers.google.com/search/docs/appearance/structured-data) trước khi triển khai.
 
 ---
 
 ## 9.7. Breadcrumb và liên kết nội bộ
 
-```html
-<!-- Breadcrumb semantic + JSON-LD -->
-<nav aria-label="Breadcrumb">
-    <ol>
-        <li><a href="/">Trang chủ</a></li>
-        <li><a href="/hoc-lap-trinh">Học lập trình</a></li>
-        <li aria-current="page">HTML</li>
-    </ul>
-</ol>
+Mục này nói về "dải chỉ đường" trong trang: breadcrumb và link nội bộ — giúp cả người dùng lẫn bot lần theo vết.
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://webviet.vn/" },
-    { "@type": "ListItem", "position": 2, "name": "Học lập trình", "item": "https://webviet.vn/hoc-lap-trinh" },
-    { "@type": "ListItem", "position": 3, "name": "HTML" }
-  ]
-}
-</script>
-```
+> 📄 **Code ví dụ:** [`examples/08-9-7-breadcrumb-va-lien-ket-noi-bo.html`](examples/08-9-7-breadcrumb-va-lien-ket-noi-bo.html)
 
 ---
 
 ## 9.8. `robots` — Điều khiển indexing
 
+Mục này nói về "biển báo cho bot": meta robots và robots.txt — cho phép hoặc cấm bot vào từng ngóc ngách của trang.
+
 ### Meta robots
 
-```html
-<meta name="robots" content="index, follow">       <!-- mặc định -->
-<meta name="robots" content="noindex, follow">      <!-- không index, vẫn theo link -->
-<meta name="robots" content="max-image-preview:large">
-<meta name="googlebot" content="noindex, nofollow">
-```
+> 📄 **Code ví dụ:** [`examples/09-meta-robots.html`](examples/09-meta-robots.html)
 
 ### robots.txt (tách khỏi HTML, đặt tại gốc domain)
 
@@ -226,25 +166,15 @@ Sitemap: https://webviet.vn/sitemap.xml
 
 ### AI crawlers (mới 2024–2026)
 
-```html
-<!-- Chặn AI training crawler -->
-<meta name="robots" content="noai, noimageai">
-<!-- Hoặc trong robots.txt -->
-<!-- User-agent: GPTBot / CCBot / Google-Extended → Disallow: / -->
-```
+> 📄 **Code ví dụ:** [`examples/10-ai-crawlers-moi-2024-2026.html`](examples/10-ai-crawlers-moi-2024-2026.html)
 
 ---
 
 ## 9.9. Headings và cấu trúc nội dung cho SEO
 
-```html
-<h1>Học HTML từ cơ bản đến nâng cao</h1>        <!-- 1 H1 duy nhất, chứa từ khóa chính -->
-  <h2>HTML là gì?</h2>
-  <h2>Lộ trình học HTML</h2>
-    <h3>Giai đoạn 1: Cơ bản</h3>
-    <h3>Giai đoạn 2: Semantic</h3>
-  <h2>Câu hỏi thường gặp</h2>
-```
+Mục này nối lại bài heading ở Phần 3 dưới góc nhìn SEO: cấu trúc `h1`–`h3` sạch giúp Google dựng được mục lục cho kết quả tìm kiếm.
+
+> 📄 **Code ví dụ:** [`examples/11-9-9-headings-va-cau-truc-noi-dung.html`](examples/11-9-9-headings-va-cau-truc-noi-dung.html)
 
 - Từ khóa chính trong `h1`, từ khóa phụ trong `h2`/`h3`
 - Cấu trúc heading hợp lý giúp Google tạo **jump links (sitelinks)** trong SERP
@@ -254,47 +184,9 @@ Sitemap: https://webviet.vn/sitemap.xml
 
 ## 9.10. Checklist SEO on-page đầy đủ
 
-```html
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <!-- 1. Essentials -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Học HTML 2026 — Lộ trình từ cơ bản đến nâng cao | WebViet</title>
-    <meta name="description" content="Lộ trình học HTML 2026: 12 phần, ví dụ thực tế, chuẩn WHATWG mới nhất. Miễn phí.">
+Mục này là "phiếu tổng kiểm tra" của cả phần: tất cả kỹ thuật SEO on-page gom vào một checklist để chạy trước khi xuất bản.
 
-    <!-- 2. Canonical -->
-    <link rel="canonical" href="https://webviet.vn/hoc-html">
-
-    <!-- 3. Open Graph + Twitter -->
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Học HTML 2026 — Lộ trình đầy đủ">
-    <meta property="og:description" content="12 phần học HTML miễn phí theo chuẩn mới nhất.">
-    <meta property="og:image" content="https://webviet.vn/og/hoc-html.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- 4. Favicon + icons -->
-    <link rel="icon" href="/favicon.ico" sizes="48x48">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-
-    <!-- 5. JSON-LD -->
-    <script type="application/ld+json">{ "@context": "https://schema.org", "@type": "Article", ... }</script>
-
-    <!-- 6. Hiệu năng (xem Phần 10) -->
-    <link rel="stylesheet" href="/css/main.css">
-    <script src="/js/app.js" defer></script>
-</head>
-<body>
-    <main>
-        <article>
-            <h1>Học HTML từ cơ bản đến nâng cao</h1>
-            ...
-        </article>
-    </main>
-</body>
-</html>
-```
+> 📄 **Code ví dụ:** [`examples/12-9-10-checklist-seo-on-page-ay-u.html`](examples/12-9-10-checklist-seo-on-page-ay-u.html)
 
 ### Công cụ kiểm tra
 
@@ -322,6 +214,8 @@ Sitemap: https://webviet.vn/sitemap.xml
 - ✅ JSON-LD + Schema.org mở khóa rich results
 - ✅ Headings phân cấp rõ ràng → Google hiểu nội dung
 - ✅ Kiểm chứng bằng Rich Results Test + Search Console
+
+> **Tóm gọn 1 câu:** SEO on-page trong HTML là nộp bộ hồ sơ chuẩn: title + description giới hạn ký tự, canonical chỉ bản chính, JSON-LD khai rõ dữ liệu — Google đọc là hiểu ngay.
 
 ---
 

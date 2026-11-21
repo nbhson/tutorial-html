@@ -1,0 +1,17 @@
+<form action="/dang-ky" method="post">
+    <fieldset>
+        <legend>Thông tin cá nhân</legend>
+
+        <label for="ho-ten">Họ và tên <span aria-hidden="true">*</span></label>
+        <input type="text" id="ho-ten" name="ho-ten" required
+               autocomplete="name" aria-required="true">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required
+               autocomplete="email" aria-describedby="email-goi-y email-loi">
+        <p id="email-goi-y">Ví dụ: ten@gmail.com</p>
+        <p id="email-loi" role="alert"></p>
+    </fieldset>
+
+    <button type="submit">Đăng ký</button>
+</form>

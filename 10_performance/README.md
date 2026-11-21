@@ -2,6 +2,8 @@
 
 ## 10.1. Hiệu năng web — Các chỉ số Core Web Vitals 2026
 
+Mục này nói về "bảng điểm tốc độ" của trang: Core Web Vitals — ba chỉ số Google dùng để chấm cảm giác nhanh/chậm, và HTML ảnh hưởng đến nó thế nào.
+
 Hiệu năng trang ảnh hưởng trực tiếp đến **trải nghiệm người dùng** và **xếp hạng tìm kiếm** (Google dùng Core Web Vitals làm tín hiệu xếp hạng).
 
 ### Core Web Vitals (chuẩn hiện tại)
@@ -12,6 +14,8 @@ Hiệu năng trang ảnh hưởng trực tiếp đến **trải nghiệm ngườ
 | **CLS** (Cumulative Layout Shift) | Độ dịch chuyển bố cục | < 0.1 |
 | **INP** (Interaction to Next Paint) | Độ trễ phản hồi tương tác | < 200ms |
 
+> **Cách đọc bảng này:** mỗi dòng là một "môn thi" của trang web — LCP thi "nhanh hiện lên", CLS thi "đứng yên không nhảy", INP thi "phản hồi lẹ tay"; cột "Mục tiêu tốt" là điểm đỗ, nhớ 3 con số đó là nhớ cả bảng.
+
 > INP đã **thay thế FID** từ tháng 3/2024. Các chỉ số khác: FCP, TTFB, CLS, TBT.
 
 ### HTML ảnh hưởng gì đến hiệu năng?
@@ -21,25 +25,17 @@ Hiệu năng trang ảnh hưởng trực tiếp đến **trải nghiệm ngườ
 - Layout shift do thiếu `width`/`height`
 - Cách trình duyệt parse và render
 
+> **Tóm gọn 1 câu:** Core Web Vitals là bảng điểm 3 môn của trang — nhanh hiện lên, không giật layout, phản hồi lẹ — và HTML của bạn trực tiếp làm điểm từng môn.
+
 ---
 
 ## 10.2. `defer`, `async`, và `type="module"`
 
+Mục này nói về "ba kiểu xếp hàng của script": blocking, async, defer — chọn sai kiểu là script tự dựng rào chắn giữa người dùng và nội dung.
+
 ### Ba cách nạp JavaScript
 
-```html
-<!-- 1. Blocking (mặc định) — CHẶN parser, chậm nhất -->
-<script src="app.js"></script>
-
-<!-- 2. async — tải song song, chạy ngay khi tải xong (thứ tự không đảm bảo) -->
-<script src="analytics.js" async></script>
-
-<!-- 3. defer — tải song song, chạy sau khi DOM parse xong, đúng thứ tự -->
-<script src="app.js" defer></script>
-
-<!-- 4. type="module" — mặc định như defer -->
-<script type="module" src="app.js"></script>
-```
+> 📄 **Code ví dụ:** [`examples/01-ba-cach-nap-javascript.html`](examples/01-ba-cach-nap-javascript.html)
 
 ### So sánh chi tiết
 
@@ -50,42 +46,19 @@ Hiệu năng trang ảnh hưởng trực tiếp đến **trải nghiệm ngườ
 | Đảm bảo thứ tự | ✅ | ❌ | ✅ |
 | Phù hợp cho | Hiếm khi | Analytics độc lập | App chính |
 
+> **Cách đọc bảng này:** mỗi cột là một "kiểu xếp hàng" của script — Blocking cắt ngang mọi thứ, Async nhảy hàng lúc nào xong lúc nấy, Defer xếp hàng lịch sự chờ DOM xong; đọc theo từng dòng để thấy mỗi kiểu tự do và đảm bảo được gì.
+
 **Khuyến nghị:** App chính dùng `defer` hoặc `type="module"`. Script độc lập (analytics, ads) có thể `async`.
+
+> **Tóm gọn 1 câu:** Script app chính nên "xếp hàng lịch sự" (`defer`/`module`), script vặt mới được "nhảy hàng" (`async`) — blocking là kiểu xếp hàng phá đám, gần như luôn tránh.
 
 ---
 
 ## 10.3. Resource Hints — Gợi ý tải tài nguyên
 
-```html
-<!-- preconnect: mở kết nối sớm (DNS + TCP + TLS) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+Mục này nói về "lời mách nước cho trình duyệt": resource hints — báo trước tài nguyên sắp cần để trình duyệt chuẩn bị từ sớm.
 
-<!-- dns-prefetch: chỉ resolve DNS (fallback cho preconnect) -->
-<link rel="dns-prefetch" href="https://api.example.com">
-
-<!-- preload: tải tài nguyên quan trọng, ưu tiên cao -->
-<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="hero.avif" as="image" fetchpriority="high">
-<link rel="preload" href="critical.css" as="style">
-
-<!-- prefetch: tải trước cho điều hướng tương lai -->
-<link rel="prefetch" href="/trang-tiep-theo.html">
-
-<!-- modulepreload: tải trước ES module và dependencies -->
-<link rel="modulepreload" href="/js/app.js">
-
-<!-- prerender/Speculation Rules: tải trước trang tiếp theo (Chrome) -->
-<script type="speculationrules">
-{
-  "prefetch": [{
-    "source": "document",
-    "where": { "href_matches": "/bai-viet/*" },
-    "eagerness": "moderate"
-  }]
-}
-</script>
-```
+> 📄 **Code ví dụ:** [`examples/02-10-3-resource-hints-goi-y-tai-tai.html`](examples/02-10-3-resource-hints-goi-y-tai-tai.html)
 
 ### Khi nào dùng cái nào?
 
@@ -96,17 +69,15 @@ Hiệu năng trang ảnh hưởng trực tiếp đến **trải nghiệm ngườ
 | `prefetch` | Trang người dùng có thể đi tiếp | Lãng phí băng thông |
 | `modulepreload` | Entry point của app JS | Rẻ |
 
+> **Cách đọc bảng này:** mỗi dòng là một "mẹo tiết kiệm thời gian" với mức rủi ro kèm theo — `preconnect` rẻ nên dùng thoải mái, `preload` mạnh nhưng "mua nhầm" là phí; đọc cột Dùng khi để biết gợi ý nào hợp với tài nguyên nào.
+
 ---
 
 ## 10.4. Lazy loading hình ảnh và iframe
 
-```html
-<!-- Ảnh lazy: chỉ tải khi sắp vào viewport -->
-<img src="anh.jpg" alt="Mô tả" width="800" height="450" loading="lazy" decoding="async">
+Mục này nói về "tải theo nhu cầu": lazy loading — chỉ tải ảnh/iframe khi người dùng cuộn tới gần, kèm một ngoại lệ quan trọng là ảnh LCP.
 
-<!-- iframe lazy -->
-<iframe src="https://www.youtube.com/embed/xyz" loading="lazy" title="Demo"></iframe>
-```
+> 📄 **Code ví dụ:** [`examples/03-10-4-lazy-loading-hinh-anh-va-iframe.html`](examples/03-10-4-lazy-loading-hinh-anh-va-iframe.html)
 
 ### Hỗ trợ trình duyệt `loading="lazy"`
 
@@ -116,20 +87,19 @@ Hiệu năng trang ảnh hưởng trực tiếp đến **trải nghiệm ngườ
 
 ### ⚠️ Không lazy-load ảnh LCP!
 
-```html
-<!-- ❌ Ảnh hero (LCP element) — lazy sẽ làm LCP tệ hơn -->
-<img src="hero.avif" loading="lazy" alt="">
+Ảnh đầu màn hình (LCP) không được lazy-load — giống như nhân viên tiếp tân không được để khách chờ ở cửa: đây chính là "gương mặt" đầu tiên trang hiện lên, chậm nó là chậm điểm LCP.
 
-<!-- ✅ Ảnh LCP: tải ngay + ưu tiên cao -->
-<img src="hero.avif" alt="Mô tả" width="1200" height="630"
-     fetchpriority="high">
-```
+> 📄 **Code ví dụ:** [`examples/04-khong-lazy-load-anh-lcp.html`](examples/04-khong-lazy-load-anh-lcp.html)
 
 `fetchpriority="high"` (Chrome 101+, Safari 17+, Firefox 132+) nâng ưu tiên tải ảnh hero.
+
+> **Tóm gọn 1 câu:** Lazy cho những gì dưới màn hình, ưu tiên cao cho tấm ảnh hero — "ai ở xa xếp hàng, người đứng cửa ưu tiên vào trước".
 
 ---
 
 ## 10.5. Tối ưu hình ảnh
+
+Mục này là "cẩm nang giảm cân cho ảnh": chọn định dạng, đúng kích thước, responsive và luôn khai báo `width`/`height`.
 
 ### Checklist tối ưu ảnh
 
@@ -141,49 +111,19 @@ Hiệu năng trang ảnh hưởng trực tiếp đến **trải nghiệm ngườ
 
 ### Ví dụ hoàn chỉnh
 
-```html
-<picture>
-    <source type="image/avif"
-            srcset="hero-400.avif 400w, hero-800.avif 800w, hero-1600.avif 1600w"
-            sizes="(max-width: 600px) 100vw, 800px">
-    <source type="image/webp"
-            srcset="hero-400.webp 400w, hero-800.webp 800w, hero-1600.webp 1600w"
-            sizes="(max-width: 600px) 100vw, 800px">
-    <img src="hero-800.jpg" alt="Bãi biển Nha Trang lúc hoàng hôn"
-         width="800" height="450" decoding="async">
-</picture>
-```
+> 📄 **Code ví dụ:** [`examples/05-vi-du-hoan-chinh.html`](examples/05-vi-du-hoan-chinh.html)
 
 ### Ảnh inline: SVG
 
-```html
-<!-- SVG inline: sắc nét mọi kích thước, nhỏ gọn cho icon -->
-<img src="icon.svg" alt="Biểu tượng" width="24" height="24">
-```
+> 📄 **Code ví dụ:** [`examples/06-anh-inline-svg.html`](examples/06-anh-inline-svg.html)
 
 ---
 
 ## 10.6. Web fonts và hiệu năng
 
-```html
-<!-- 1. preconnect tới font CDN -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+Mục này nói về "mâu thuẫn chữ đẹp – trang nhanh": web font làm trang đẹp nhưng chờ nó là chữ bị ẩn/đổi — `font-display` giải quyết chính bài toán đó.
 
-<!-- 2. Font display: swap -->
-<style>
-  @font-face {
-    font-family: 'Be Vietnam Pro';
-    src: url('/fonts/be-vietnam-pro.woff2') format('woff2');
-    font-display: swap;        /* hiển thị fallback ngay, đổi font khi tải xong */
-    font-weight: 400 700;      /* variable font */
-    font-style: normal;
-  }
-</style>
-
-<!-- 3. Preload font quan trọng -->
-<link rel="preload" href="/fonts/be-vietnam-pro.woff2" as="font" type="font/woff2" crossorigin>
-```
+> 📄 **Code ví dụ:** [`examples/07-10-6-web-fonts-va-hieu-nang.html`](examples/07-10-6-web-fonts-va-hieu-nang.html)
 
 ### `font-display` các giá trị
 
@@ -194,81 +134,43 @@ Hiệu năng trang ảnh hưởng trực tiếp đến **trải nghiệm ngườ
 | `fallback` | Hiện fallback ngắn, sau ~100ms đổi sang fallback vĩnh viễn nếu chậm |
 | `optional` | Chỉ dùng font nếu tải xong rất nhanh |
 
+> **Cách đọc bảng này:** mỗi dòng là một "chiến lược chờ font" — từ khoan nhòng (`block`: đứng đợi) đến thực dụng (`optional`: có thì dùng, không có thì thôi); `swap` là lựa chọn cân bằng được dùng phổ biến nhất.
+
 ---
 
 ## 10.7. CSS blocking và Critical CSS
 
-```html
-<head>
-    <!-- CSS chặn render — giảm thiểu bằng: -->
-    <link rel="stylesheet" href="/css/main.css">
+Mục này nói về "chi phí bắt buộc của CSS": CSS chặn render đầu trang — critical CSS là cách gói phần CSS "gấp gáp" vào ngay lúc đầu.
 
-    <!-- Inline CSS "above the fold" -->
-    <style>
-      /* CSS cho phần nhìn thấy đầu tiên */
-      .hero { min-height: 60vh; }
-    </style>
-
-    <!-- CSS không quan trọng: tải không chặn -->
-    <link rel="stylesheet" href="/css/print.css" media="print">
-    <link rel="stylesheet" href="/css/print-other.css" media="print" onload="this.media='all'">
-</head>
-```
+> 📄 **Code ví dụ:** [`examples/08-10-7-css-blocking-va-critical-css.html`](examples/08-10-7-css-blocking-va-critical-css.html)
 
 ---
 
 ## 10.8. Tối ưu DOM — quy tắc số phần tử
 
-- **DOM quá lớn** (~> 800 nodes, > 1400 depth) làm chậm style/layout
+Mục này nói về "giới hạn sức chứa": DOM quá to và lồng quá sâu làm trình duyệt đuối — kèm công cụ `content-visibility` để nhẹ gánh.
+
+- **DOM quá lớn** (~> 800 nodes, > 1400 depth) làm chậm style/layout — như một cây gia phả ngàn nhánh: càng nhiều tầng càng khó tra
 - Tránh lồng div quá sâu không cần thiết
 - Dùng `content-visibility: auto` cho phần tử ngoài màn hình (Baseline 2023–2025):
 
-```html
-<style>
-  /* Bỏ qua render phần tử ngoài viewport */
-  .long-list-item { content-visibility: auto; contain-intrinsic-size: 0 200px; }
-</style>
-```
+> 📄 **Code ví dụ:** [`examples/09-10-8-toi-uu-dom-quy-tac-so.html`](examples/09-10-8-toi-uu-dom-quy-tac-so.html)
+
+> **Tóm gọn 1 câu:** DOM gọn như cây gia phả gọn — ít nhánh, ít tầng, và phần "ngoài tầm nhìn" thì để trình duyệt tạm quên (`content-visibility: auto`).
 
 ---
 
 ## 10.9. Chiến lược nạp trang tổng thể
 
-```html
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+Mục này ghép mọi kỹ thuật trên thành "kịch bản dàn dựng" một lần tải trang hoàn chỉnh.
 
-    <!-- 1. Kết nối sớm -->
-    <link rel="preconnect" href="https://cdn.example.com" crossorigin>
-    <link rel="dns-prefetch" href="https://api.example.com">
-
-    <!-- 2. Preload LCP -->
-    <link rel="preload" as="image" href="/hero.avif" fetchpriority="high">
-
-    <!-- 3. CSS + Font -->
-    <link rel="stylesheet" href="/css/critical.css">
-    <link rel="preload" as="font" href="/fonts/main.woff2" type="font/woff2" crossorigin>
-
-    <!-- 4. JS không chặn -->
-    <script src="/js/app.js" type="module"></script>
-    <script src="/js/analytics.js" defer></script>
-</head>
-<body>
-    <!-- LCP element: KHÔNG lazy -->
-    <img src="/hero.avif" alt="Hero" width="1200" height="630" fetchpriority="high">
-
-    <!-- Ảnh dưới màn hình: lazy -->
-    <img src="/item.jpg" alt="Sản phẩm" width="400" height="300" loading="lazy">
-</body>
-</html>
-```
+> 📄 **Code ví dụ:** [`examples/10-10-9-chien-luoc-nap-trang-tong-the.html`](examples/10-10-9-chien-luoc-nap-trang-tong-the.html)
 
 ---
 
 ## 10.10. Đo lường hiệu năng
+
+Mục này là "phòng xét nghiệm": công cụ nào đo chỉ số nào — từ DevTools, PageSpeed đến Search Console.
 
 ### Công cụ
 
@@ -279,21 +181,7 @@ Hiệu năng trang ảnh hưởng trực tiếp đến **trải nghiệm ngườ
 
 ### API JavaScript (PageSpeed)
 
-```javascript
-// Đo LCP bằng PerformanceObserver
-new PerformanceObserver((list) => {
-  const entries = list.getEntries();
-  const last = entries[entries.length - 1];
-  console.log('LCP:', last.startTime, 'ms');
-}).observe({ type: 'largest-contentful-paint', buffered: true });
-
-// Đo CLS
-new PerformanceObserver((list) => {
-  let cls = 0;
-  for (const entry of list.getEntries()) if (!entry.hadRecentInput) cls += entry.value;
-  console.log('CLS:', cls);
-}).observe({ type: 'layout-shift', buffered: true });
-```
+> 📄 **Code ví dụ:** [`examples/11-api-javascript-pagespeed.js`](examples/11-api-javascript-pagespeed.js)
 
 ---
 
@@ -314,6 +202,8 @@ new PerformanceObserver((list) => {
 - ✅ `fetchpriority="high"` cho ảnh hero
 - ✅ `font-display: swap` + `preconnect` cho font
 - ✅ `content-visibility: auto` cho danh sách dài
+
+> **Tóm gọn 1 câu:** Hiệu năng là "quản lý hàng đợi": script defer, ảnh lazy trừ hero, font swap, DOM gọn — rồi đo bằng Core Web Vitals để biết điểm từng môn.
 
 ---
 

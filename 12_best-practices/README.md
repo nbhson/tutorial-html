@@ -2,6 +2,8 @@
 
 ## 12.1. HTML Style Guide — Quy ước viết code
 
+Mục này là "nội quy phòng làm việc chung": quy ước viết code để cả nhóm đọc code của nhau không phải đoán mò.
+
 ### 12.1.1. Quy ước chung
 
 1. **Luôn khai báo DOCTYPE** ở dòng đầu tiên
@@ -10,105 +12,41 @@
 4. **Thụt lề 2 spaces** (hoặc 4 — chọn một, nhất quán toàn dự án)
 5. **Một dòng một phần tử** cho các khối lớn
 
-```html
-<!-- ✅ Chuẩn -->
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Tiêu đề</title>
-</head>
-<body>
-    <main>
-        <h1>Tiêu đề</h1>
-        <p>Nội dung.</p>
-    </main>
-</body>
-</html>
-
-<!-- ❌ Không nhất quán -->
-<HTML>
-<HEAD><TITLE>x</TITLE></head>
-<body><DIV class="a"><P>x</P></DIV></body>
-</html>
-```
+> 📄 **Code ví dụ:** [`examples/01-12-1-1-quy-uoc-chung.html`](examples/01-12-1-1-quy-uoc-chung.html)
 
 ### 12.1.2. Quy ước đặt tên
 
-```html
-<!-- class: kebab-case -->
-<div class="product-card is-featured">...</div>
-
-<!-- id: kebab-case, duy nhất -->
-<section id="user-profile"></section>
-
-<!-- data-*: kebab-case -->
-<div data-user-id="42"></div>
-
-<!-- file: lowercase, không khoảng trắng -->
-<!-- index.html, ve-chung-toi.html, css/main.css -->
-```
+> 📄 **Code ví dụ:** [`examples/02-12-1-2-quy-uoc-at-ten.html`](examples/02-12-1-2-quy-uoc-at-ten.html)
 
 ### 12.1.3. Thứ tự thuộc tính khuyến nghị
 
-```html
-<a class="btn" id="login-btn" href="/dang-nhap" target="_blank" data-role="cta" aria-label="Đăng nhập">
-```
+> 📄 **Code ví dụ:** [`examples/03-12-1-3-thu-tu-thuoc-tinh-khuyen.html`](examples/03-12-1-3-thu-tu-thuoc-tinh-khuyen.html)
 
 1. `class` → 2. `id` → 3. `name` → 4. `data-*` → 5. `src`, `href`, `for` → 6. `type`, `value` → 7. `title`, `alt` → 8. `role`, `aria-*` → 9. sự kiện (`onclick`...)
+
+> **Tóm gọn 1 câu:** Style guide là "vệ sinh chung của cả nhà" — viết thường, ngoặc kép, thụt lề nhất quán, thứ tự thuộc tính ổn định để ai đọc cũng không phải đoán.
 
 ---
 
 ## 12.2. 20 lỗi HTML phổ biến và cách sửa
 
+Mục này là "sách bệnh án" dày nhất của khóa học: 20 lỗi hay gặp nhất, kèm ví dụ sai/đúng — đọc một lần tiết kiệm vô số lần debug sau này.
+
 ### 12.2.1. Thiếu `alt` trên hình ảnh
 
-```html
-<!-- ❌ -->
-<img src="anh.jpg">
-
-<!-- ✅ -->
-<img src="anh.jpg" alt="Người dùng đang học HTML trên laptop" width="800" height="450">
-```
+> 📄 **Code ví dụ:** [`examples/04-12-2-1-thieu-alt-tren-hinh-anh.html`](examples/04-12-2-1-thieu-alt-tren-hinh-anh.html)
 
 ### 12.2.2. Dùng `<br>` để tạo khoảng cách thay vì CSS margin
 
-```html
-<!-- ❌ -->
-<p>Dòng 1<br><br>Dòng tiếp theo</p>
-
-<!-- ✅ -->
-<p>Dòng 1</p>
-<p>Dòng tiếp</p>
-```
+> 📄 **Code ví dụ:** [`examples/05-12-2-2-dung-br-e-tao-khoang.html`](examples/05-12-2-2-dung-br-e-tao-khoang.html)
 
 ### 12.2.3. Dùng bảng để dàn layout
 
-```html
-<!-- ❌ Cấu trúc thời HTML4 -->
-<table>
-    <tr><td>Sidebar</td><td>Nội dung</td></tr>
-</table>
-
-<!-- ✅ Dùng semantic + CSS Grid/Flexbox -->
-<div class="layout">
-    <aside>Sidebar</aside>
-    <main>Nội dung</main>
-</div>
-```
+> 📄 **Code ví dụ:** [`examples/06-12-2-3-dung-bang-e-dan-layout.html`](examples/06-12-2-3-dung-bang-e-dan-layout.html)
 
 ### 12.2.4. Thẻ lồng sai
 
-```html
-<!-- ❌ Sai: block chứa trong inline; p chứa p -->
-<p><div>Sai!</div></p>
-<a href="#"><h2>Tiêu đề</h2></a>
-
-<!-- ✅ Đúng -->
-<a href="/bai-viet">
-    <h2>Tiêu đề bài viết</h2>   <!-- a chứa heading: HỢP LỆ từ HTML5 -->
-</a>
-```
+> 📄 **Code ví dụ:** [`examples/07-12-2-4-the-long-sai.html`](examples/07-12-2-4-the-long-sai.html)
 
 ### 12.2.5. Nhiều `<h1>` hoặc bỏ hẳn heading
 
@@ -116,24 +54,11 @@ Mỗi trang một `<h1>`; không nhảy cấp; không dùng heading chỉ vì mu
 
 ### 12.2.6. `<div>` làm nút bấm
 
-```html
-<!-- ❌ -->
-<div onclick="save()" class="save-btn">Lưu</div>
-
-<!-- ✅ -->
-<button type="button" onclick="save()">Lưu</button>
-```
+> 📄 **Code ví dụ:** [`examples/08-12-2-6-div-lam-nut-bam.html`](examples/08-12-2-6-div-lam-nut-bam.html)
 
 ### 12.2.7. Thiếu `label` cho input
 
-```html
-<!-- ❌ -->
-<input type="text" name="ho-ten" placeholder="Họ và tên">
-
-<!-- ✅ -->
-<label for="ho-ten">Họ và tên</label>
-<input type="text" id="ho-ten" name="ho-ten">
-```
+> 📄 **Code ví dụ:** [`examples/09-12-2-7-thieu-label-cho-input.html`](examples/09-12-2-7-thieu-label-cho-input.html)
 
 ### 12.2.8. Nhầm `<b>`/`<i>` với `<strong>`/`<em>`
 
@@ -141,11 +66,7 @@ Dùng `<strong>`/`<em>` khi mang ngữ nghĩa; `<b>`/`<i>` chỉ cho mục đíc
 
 ### 12.2.9. Nhiều `id` trùng lặp
 
-```html
-<!-- ❌ Hai id giống nhau -->
-<div id="card">...</div>
-<div id="card">...</div>
-```
+> 📄 **Code ví dụ:** [`examples/10-12-2-9-nhieu-id-trung-lap.html`](examples/10-12-2-9-nhieu-id-trung-lap.html)
 
 ### 12.2.10. Thiếu `alt=""` cho ảnh trang trí
 
@@ -153,25 +74,11 @@ Dùng `<strong>`/`<em>` khi mang ngữ nghĩa; `<b>`/`<i>` chỉ cho mục đíc
 
 ### 12.2.11. Quên đóng thẻ
 
-```html
-<!-- ❌ -->
-<p>Đoạn văn 1
-<p>Đoạn văn 2
-
-<!-- ✅ -->
-<p>Đoạn văn 1</p>
-<p>Đoạn văn 2</p>
-```
+> 📄 **Code ví dụ:** [`examples/11-12-2-11-quen-ong-the.html`](examples/11-12-2-11-quen-ong-the.html)
 
 ### 12.2.12. Dùng `target="_blank"` không có `rel="noopener"`
 
-```html
-<!-- ❌ -->
-<a href="https://khac.com" target="_blank">Link</a>
-
-<!-- ✅ -->
-<a href="https://khac.com" target="_blank" rel="noopener noreferrer">Link</a>
-```
+> 📄 **Code ví dụ:** [`examples/12-12-2-12-dung-target-blank-khong-co.html`](examples/12-12-2-12-dung-target-blank-khong-co.html)
 
 ### 12.2.13. Thẻ `<script>` không có `defer`
 
@@ -181,13 +88,9 @@ Xem [Phần 10](../10_performance/README.md) — dùng `defer`/`module`.
 
 ### 12.2.15. Thẻ `<a href="#">` làm button
 
-```html
-<!-- ❌ -->
-<a href="#" onclick="doSomething()">Xóa</a>
+> 📄 **Code ví dụ:** [`examples/13-12-2-15-the-a-href-lam-button.html`](examples/13-12-2-15-the-a-href-lam-button.html)
 
-<!-- ✅ -->
-<button type="button" onclick="doSomething()">Xóa</button>
-```
+> **Tóm gọn 1 câu:** 20 lỗi trên đều chung một gốc: dùng thẻ sai vai — thẻ nào đóng vai gì thì để thẻ đó diễn, đừng cast nhầm vai vì tiện tay.
 
 ### 12.2.16. Nhồi inline style
 
@@ -199,13 +102,7 @@ Xem [Phần 10](../10_performance/README.md) — dùng `defer`/`module`.
 
 ### 12.2.18. Thiếu `lang` trên `<html>`
 
-```html
-<!-- ❌ -->
-<html>
-
-<!-- ✅ -->
-<html lang="vi">
-```
+> 📄 **Code ví dụ:** [`examples/14-12-2-18-thieu-lang-tren-html.html`](examples/14-12-2-18-thieu-lang-tren-html.html)
 
 ### 12.2.19. Dùng heading để làm chữ to/màu
 
@@ -219,6 +116,8 @@ Trên mobile trang sẽ hiển thị như desktop thu nhỏ — thêm viewport m
 
 ## 12.3. Validator — Kiểm tra HTML hợp lệ
 
+Mục này nói về "bác sĩ kiểm tra sức khỏe định kỳ": validator — máy móc soi lỗi cú pháp thay cho đôi mắt đã mòn mỏi của bạn.
+
 ### W3C Markup Validator
 
 - URL: **https://validator.w3.org/**
@@ -226,14 +125,7 @@ Trên mobile trang sẽ hiển thị như desktop thu nhỏ — thêm viewport m
 
 ### Cách khác
 
-```bash
-# html-validate (CLI, cho dự án)
-npm install -g html-validate
-html-validate "**/*.html"
-
-# axe (a11y)
-npx @axe-core/cli https://example.com
-```
+> 📄 **Code ví dụ:** [`examples/15-cach-khac.sh`](examples/15-cach-khac.sh)
 
 ### VS Code extension
 
@@ -242,15 +134,13 @@ npx @axe-core/cli https://example.com
 
 ### Kiểm tra tự động trong CI
 
-```yaml
-# GitHub Actions
-- name: HTML validation
-  run: npx html-validate "dist/**/*.html"
-```
+> 📄 **Code ví dụ:** [`examples/16-kiem-tra-tu-ong-trong-ci.yaml`](examples/16-kiem-tra-tu-ong-trong-ci.yaml)
 
 ---
 
 ## 12.4. Checklist cuối cùng trước khi publish
+
+Mục này là "điểm danh trước khi xuất quân": 4 nhóm kiểm tra — cấu trúc, a11y, SEO/hiệu năng, bảo mật — rà từng ô trước khi bấm deploy.
 
 ### Cấu trúc
 
@@ -285,6 +175,8 @@ npx @axe-core/cli https://example.com
 - [ ] HTML validate qua W3C Validator
 - [ ] Không có lỗi console
 
+> **Tóm gọn 1 câu:** Checklist này là "kiểm tra an toàn trước khi cất cánh" — 4 nhóm ô đều xanh thì trang mới đáng để public.
+
 ---
 
 ## 12.5. Tài liệu tham khảo
@@ -302,6 +194,8 @@ npx @axe-core/cli https://example.com
 - ✅ Tránh 20 lỗi phổ biến: thiếu alt, label, div-button, table layout...
 - ✅ Validate bằng W3C Validator + Lighthouse trước khi deploy
 - ✅ Đưa checklist vào code review và CI
+
+> **Tóm gọn 1 câu:** Phần cuối là "cẩm nang giữ hình": style guide giữ code đồng đều, validator bắt lỗi máy móc, checklist chốt cửa trước khi publish.
 
 ---
 

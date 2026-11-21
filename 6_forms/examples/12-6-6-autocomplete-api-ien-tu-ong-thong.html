@@ -1,0 +1,26 @@
+<form action="/thanh-toan" method="post" autocomplete="on">
+    <!-- Thông tin cá nhân -->
+    <input type="text" name="ho" autocomplete="family-name">
+    <input type="text" name="ten" autocomplete="given-name">
+    <input type="email" name="email" autocomplete="email">
+    <input type="tel" name="sdt" autocomplete="tel">
+
+    <!-- Địa chỉ (token nhóm) -->
+    <input type="text" name="dia-chi" autocomplete="street-address">
+    <input type="text" name="tinh" autocomplete="address-level1">
+    <input type="text" name="quan" autocomplete="address-level2">
+    <input type="text" name="ma-buu-dien" autocomplete="postal-code">
+
+    <!-- Thẻ tín dụng -->
+    <input type="text" name="so-the" autocomplete="cc-number">
+    <input type="text" name="ten-tren-the" autocomplete="cc-name">
+    <input type="text" name="han-the" autocomplete="cc-exp">
+
+    <!-- Mật khẩu: các giá trị quan trọng cho password manager -->
+    <input type="password" name="mk-hien-tai" autocomplete="current-password">
+    <input type="password" name="mk-moi" autocomplete="new-password">
+
+    <!-- OTP một lần -->
+    <input type="text" name="otp" autocomplete="one-time-code"
+           inputmode="numeric" pattern="[0-9]{6}">
+</form>
